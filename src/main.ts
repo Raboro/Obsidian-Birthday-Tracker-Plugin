@@ -7,7 +7,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 	async onload() {
 		await this.loadSettings();
 
-		const ribbonIconEl = this.addRibbonIcon('dice', 'Track birthdays', (evt: MouseEvent) => {
+		const ribbonIconEl = this.addRibbonIcon('cake', 'Track birthdays', (evt: MouseEvent) => {
 			new Notice('Track birthdays');
 		});
 		ribbonIconEl.addClass('birthday-tracker-plugin-ribbon-class');
