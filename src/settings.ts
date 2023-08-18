@@ -1,6 +1,14 @@
 import { App, Notice, PluginSettingTab, Setting } from "obsidian";
 import BirthdayTrackerPlugin from "./main";
 
+export interface BirthdayTrackerSettings {
+	dateFormatting: string;
+}
+
+export const DEFAULT_SETTINGS: BirthdayTrackerSettings = {
+	dateFormatting: 'DD/MM/YYYY'
+};
+
 export class BirthdayTrackerSettingTab extends PluginSettingTab {
 	plugin: BirthdayTrackerPlugin;
 
