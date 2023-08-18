@@ -1,11 +1,11 @@
 import { App, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
 
 interface BirthdayTrackerSettings {
-	mySetting: string;
+	dateFormatting: string;
 }
 
 const DEFAULT_SETTINGS: BirthdayTrackerSettings = {
-	mySetting: 'default'
+	dateFormatting: 'DD/MM/YYYY'
 };
 
 export default class BirthdayTrackerPlugin extends Plugin {
@@ -63,13 +63,13 @@ class BirthdayTrackerSettingTab extends PluginSettingTab {
 		containerEl.empty();
 
 		new Setting(containerEl)
-			.setName('Setting #1')
-			.setDesc('It\'s a secret')
+			.setName('Date formatting')
+			.setDesc('Format your dates will be displayed and collected')
 			.addText(text => text
-				.setPlaceholder('Enter your secret')
-				.setValue(this.plugin.settings.mySetting)
+				.setPlaceholder('Enter your format')
+				.setValue(this.plugin.settings.dateFormatting)
 				.onChange(async (value) => {
-					this.plugin.settings.mySetting = value;
+					this.plugin.settings.dateFormatting = value;
 					await this.plugin.saveSettings();
 				}));
 	}
