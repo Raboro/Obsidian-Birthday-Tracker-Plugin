@@ -1,17 +1,15 @@
 import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting } from 'obsidian';
 
-// Remember to rename these classes and interfaces!
-
-interface MyPluginSettings {
+interface BirthdayTrackerSettings {
 	mySetting: string;
 }
 
-const DEFAULT_SETTINGS: MyPluginSettings = {
+const DEFAULT_SETTINGS: BirthdayTrackerSettings = {
 	mySetting: 'default'
 };
 
-export default class MyPlugin extends Plugin {
-	settings: MyPluginSettings;
+export default class BirthdayTrackerPlugin extends Plugin {
+	settings: BirthdayTrackerSettings;
 
 	async onload() {
 		await this.loadSettings();
@@ -66,7 +64,7 @@ export default class MyPlugin extends Plugin {
 		});
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
-		this.addSettingTab(new SampleSettingTab(this.app, this));
+		this.addSettingTab(new BirthdayTrackerSettingTab(this.app, this));
 
 		// If the plugin hooks up any global DOM events (on parts of the app that doesn't belong to this plugin)
 		// Using this function will automatically remove the event listener when this plugin is disabled.
@@ -107,10 +105,10 @@ class SampleModal extends Modal {
 	}
 }
 
-class SampleSettingTab extends PluginSettingTab {
-	plugin: MyPlugin;
+class BirthdayTrackerSettingTab extends PluginSettingTab {
+	plugin: BirthdayTrackerPlugin;
 
-	constructor(app: App, plugin: MyPlugin) {
+	constructor(app: App, plugin: BirthdayTrackerPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}
