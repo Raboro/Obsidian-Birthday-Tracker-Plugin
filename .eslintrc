@@ -14,10 +14,11 @@
         "sourceType": "module"
     },
     "rules": {
-      "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": ["error", { "args": "none" }],
       "@typescript-eslint/ban-ts-comment": "off",
       "no-prototype-builtins": "off",
+      "semi": ["error", "always"],
+      "no-var": "error",
       "@typescript-eslint/no-empty-function": "off"
     } 
   }
