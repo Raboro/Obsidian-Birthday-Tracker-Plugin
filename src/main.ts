@@ -20,8 +20,8 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		ribbonIconEl.addClass('birthday-tracker-plugin-ribbon-class');
 
 		this.addCommand({
-			id: 'open-sample-modal-simple',
-			name: 'Open sample modal (simple)',
+			id: 'birthday-tracker-track-birthdays',
+			name: 'Track birthdays',
 			callback: () => {
 				new Notice("worked");
 			}
