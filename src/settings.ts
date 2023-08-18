@@ -10,26 +10,27 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
 	}
 
 	display(): void {
-		const {containerEl} = this;
-
-		containerEl.empty();
-
-		new Setting(containerEl)
-			.setName('Date formatting')
-			.setDesc('Format your dates will be displayed and collected')
-			.addText(text => text
-				.setPlaceholder('Enter your format')
-				.setValue(this.plugin.settings.dateFormatting)
-				.onChange(async (value) => {
-					let noticeMessage = "Wrong date formatting!!";
-					if (this.isFormattingValid(value)) {
-						this.plugin.settings.dateFormatting = value;
-						await this.plugin.saveSettings();
-						noticeMessage = "Valid date formatting";
-					} 
-					new Notice(noticeMessage);
-				}));
+		this.containerEl.empty();
+		this.dateFormattingSettings();
 	}
+
+    dateFormattingSettings(): Setting {
+        return new Setting(this.containerEl)
+        .setName('Date formatting')
+        .setDesc('Format your dates will be displayed and collected')
+        .addText(text => text
+            .setPlaceholder('Enter your format')
+            .setValue(this.plugin.settings.dateFormatting)
+            .onChange(async (value) => {
+                let noticeMessage = "Wrong date formatting!!";
+                if (this.isFormattingValid(value)) {
+                    this.plugin.settings.dateFormatting = value;
+                    await this.plugin.saveSettings();
+                    noticeMessage = "Valid date formatting";
+                } 
+                new Notice(noticeMessage);
+            }));
+    }
 
 	isFormattingValid(format: string): boolean {
 		const containsDoubleD: boolean = this.formatContains("DD", format);
