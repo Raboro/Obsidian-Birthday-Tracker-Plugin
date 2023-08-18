@@ -27,15 +27,6 @@ export default class BirthdayTrackerPlugin extends Plugin {
 			}
 		});
 
-		this.addCommand({
-			id: 'sample-editor-command',
-			name: 'Sample editor command',
-			editorCallback: (editor: Editor, view: MarkdownView) => {
-				console.log(editor.getSelection());
-				editor.replaceSelection('Sample Editor Command');
-			}
-		});
-
 		this.addSettingTab(new BirthdayTrackerSettingTab(this.app, this));
 
 		this.registerDomEvent(document, 'click', (evt: MouseEvent) => {
