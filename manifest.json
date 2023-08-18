@@ -1,11 +1,10 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
+	"id": "obsidian-birthday-tracker-plugin",
+	"name": "Birthday-Tracker",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "This is a sample plugin for Obsidian. This plugin demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "With this plugin you can keep track of the birthdays of your friends and family members.",
+	"author": "Marius Wörfel",
+	"authorUrl": "https://github.com/Raboro",
 	"isDesktopOnly": false
 }
