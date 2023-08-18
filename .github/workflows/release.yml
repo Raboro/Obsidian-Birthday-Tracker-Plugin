@@ -24,7 +24,7 @@ jobs:
 
             - name: Build plugin
               run: |
-                  npm ci
+                  npm install
                   npm run build
 
             - name: Create release
