@@ -69,7 +69,7 @@ class BirthdayTrackerSettingTab extends PluginSettingTab {
 				.setPlaceholder('Enter your format')
 				.setValue(this.plugin.settings.dateFormatting)
 				.onChange(async (value) => {
-					let noticeMessage: string = "Wrong date formatting!!";
+					let noticeMessage = "Wrong date formatting!!";
 					if (this.isFormattingValid(value)) {
 						this.plugin.settings.dateFormatting = value;
 						await this.plugin.saveSettings();
