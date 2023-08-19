@@ -46,7 +46,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 
 	trackBirthdaysOfContent = async (content: string) => {
 		const persons: Array<Person> = this.collectPersons(content);
-		persons.forEach(person => console.log(person))
+		persons.sort((p1: Person, p2: Person) => p1.compareTo(p2));
 	};
 
 	collectPersons(content: string): Array<Person> {

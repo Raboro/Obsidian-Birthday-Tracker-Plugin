@@ -20,4 +20,8 @@ export default class Birthday {
     private dateNumber(start: number, end: number, offset?: number): number {
         return parseInt(this.str.substring(start, end)) - (offset ?? 0)
     }
+
+    compareTo(other: Birthday): number {
+        return this.date.getTime() - other.date.getTime();
+    }
 }

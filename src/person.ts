@@ -8,4 +8,8 @@ export default class Person {
 		this.name = name;
 		this.birthday = birthday;
 	}
+
+	compareTo(other: Person): number {
+		return this.birthday.compareTo(other.birthday);
+	}
 }
