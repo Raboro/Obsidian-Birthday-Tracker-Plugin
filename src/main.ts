@@ -34,7 +34,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		}
 	};
 
-	async fetchContent():Promise<string | undefined> {
+	async fetchContent(): Promise<string | undefined> {
 		for (const file of this.app.vault.getFiles()) {
 			const content = await this.app.vault.read(file);
 			if (content.contains("BIRTHDAY_FILE")) {
