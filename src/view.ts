@@ -4,7 +4,7 @@ import Person from "./person";
 export const BIRTHDAY_TRACKER_VIEW_TYPE = "Birthday-Tracker";
 
 export class BirthdayTrackerView extends ItemView {
-    persons: Array<Person>
+    persons: Array<Person>;
     icon = "cake";
 
     constructor(leaf: WorkspaceLeaf, persons: Array<Person>) {

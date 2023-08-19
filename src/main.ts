@@ -6,7 +6,7 @@ import { BIRTHDAY_TRACKER_VIEW_TYPE, BirthdayTrackerView } from './view';
 
 export default class BirthdayTrackerPlugin extends Plugin {
 	settings: BirthdayTrackerSettings;
-	persons: Array<Person>
+	persons: Array<Person>;
 
 	async onload() {
 		await this.loadSettings();
