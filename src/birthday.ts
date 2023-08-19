@@ -33,6 +33,21 @@ export default class Birthday {
         return this.date.getTime() - other.date.getTime();
     }
 
+    daysTillBirthday(): number {
+        const days = this.calcDays(new Date().getFullYear());
+        if (days === -0) {
+            return 0;
+        }
+        return days > 0 ? days : this.calcDays(new Date().getFullYear() + 1);
+    }
+
+    private calcDays(newYear: number): number {
+        const dateCurrentYear: Date = new Date(this.date);
+        dateCurrentYear.setFullYear(newYear);
+        const timeDifference = new Date().getTime() - dateCurrentYear.getTime();
+        return -Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+    }
+
     toString(): string {
         return this.str;
     }
