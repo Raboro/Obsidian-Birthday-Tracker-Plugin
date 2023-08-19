@@ -1,10 +1,12 @@
 export default class Birthday {
 	private str: string;
     private date: Date;
+    private nextBirthday: number;
 
 	constructor(str: string, dateFormatting: string) {
 		this.str = str;
         this.convertStringToDate(dateFormatting);
+        this.nextBirthday = this.daysTillBirthday();
 	}
 
     private convertStringToDate(dateFormatting: string) {
@@ -29,10 +31,6 @@ export default class Birthday {
         return parseInt(this.str.substring(start, end)) - (offset ?? 0);
     }
 
-    compareTo(other: Birthday): number {
-        return this.date.getTime() - other.date.getTime();
-    }
-
     daysTillBirthday(): number {
         const days = this.calcDays(new Date().getFullYear());
         if (days === -0) {
@@ -46,6 +44,10 @@ export default class Birthday {
         dateCurrentYear.setFullYear(newYear);
         const timeDifference = new Date().getTime() - dateCurrentYear.getTime();
         return -Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+    }
+
+    compareTo(other: Birthday): number {
+        return this.nextBirthday - other.nextBirthday;
     }
 
     toString(): string {
