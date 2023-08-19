@@ -6,11 +6,12 @@ import { BIRTHDAY_TRACKER_VIEW_TYPE, BirthdayTrackerView } from './view';
 
 export default class BirthdayTrackerPlugin extends Plugin {
 	settings: BirthdayTrackerSettings;
+	persons: Array<Person>
 
 	async onload() {
 		await this.loadSettings();
 
-		this.registerView(BIRTHDAY_TRACKER_VIEW_TYPE, (leaf) => new BirthdayTrackerView(leaf));
+		this.registerView(BIRTHDAY_TRACKER_VIEW_TYPE, (leaf) => new BirthdayTrackerView(leaf, this.persons));
 
 		const ribbonIconEl = this.addRibbonIcon('cake', 'Track birthdays', this.trackBirthdays);
 		ribbonIconEl.addClass('birthday-tracker-plugin-ribbon-class');
@@ -55,9 +56,9 @@ export default class BirthdayTrackerPlugin extends Plugin {
 	}
 
 	trackBirthdaysOfContent = async (content: string) => {
-		const persons: Array<Person> = this.collectPersons(content);
-		persons.sort((p1: Person, p2: Person) => p1.compareTo(p2));
-		this.noticeIfBirthdayToday(persons);
+		this.persons = this.collectPersons(content);
+		this.persons.sort((p1: Person, p2: Person) => p1.compareTo(p2));
+		this.noticeIfBirthdayToday(this.persons);
 	};
 
 	collectPersons(content: string): Array<Person> {
