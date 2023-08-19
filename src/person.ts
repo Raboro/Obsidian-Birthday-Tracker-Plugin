@@ -12,4 +12,18 @@ export default class Person {
 	compareTo(other: Person): number {
 		return this.birthday.compareTo(other.birthday);
 	}
+
+	toDTO(): Readonly<PersonDTO> {
+		return new PersonDTO(this.name, this.birthday.toString());
+	}
+}
+
+export class PersonDTO {
+	name: string
+	birthday: string
+
+	constructor(name: string, birthday: string) {
+		this.name = name;
+		this.birthday = birthday;
+	}
 }
