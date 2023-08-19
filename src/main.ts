@@ -49,7 +49,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 
 	collectPersons(content: string): Array<Person> {
 		const persons: Array<Person> = [];
-		const splitChar: string = ";";
+		const splitChar = ";";
 		content.split(/\r?\n/).forEach(person => {
 			const name = person.substring(5, person.search(splitChar));
 			const birthday = person.substring(person.search(splitChar) + 11);

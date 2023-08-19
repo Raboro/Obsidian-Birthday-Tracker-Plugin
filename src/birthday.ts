@@ -1,9 +1,9 @@
 export default class Birthday {
-	private str: string
-    private date: Date
+	private str: string;
+    private date: Date;
 
 	constructor(str: string, dateFormatting: string) {
-		this.str = str
+		this.str = str;
         this.convertStringToDate(dateFormatting);
 	}
 
@@ -26,7 +26,7 @@ export default class Birthday {
     }
 
     private dateNumber(start: number, end: number, offset?: number): number {
-        return parseInt(this.str.substring(start, end)) - (offset ?? 0)
+        return parseInt(this.str.substring(start, end)) - (offset ?? 0);
     }
 
     compareTo(other: Birthday): number {

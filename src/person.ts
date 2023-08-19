@@ -1,8 +1,8 @@
 import Birthday from "./birthday";
 
 export default class Person {
-	private name: string
-	private birthday: Birthday
+	private name: string;
+	private birthday: Birthday;
 
 	constructor(name: string, birthday: Birthday) {
 		this.name = name;
@@ -19,8 +19,8 @@ export default class Person {
 }
 
 export class PersonDTO {
-	name: string
-	birthday: string
+	name: string;
+	birthday: string;
 
 	constructor(name: string, birthday: string) {
 		this.name = name;
