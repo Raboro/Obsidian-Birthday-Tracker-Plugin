@@ -1,8 +1,8 @@
 import Birthday from "./birthday";
 
 export default class Person {
-	name: string
-	birthday: Birthday
+	private name: string
+	private birthday: Birthday
 
 	constructor(name: string, birthday: Birthday) {
 		this.name = name;
