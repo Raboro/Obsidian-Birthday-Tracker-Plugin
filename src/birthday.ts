@@ -33,7 +33,7 @@ export default class Birthday {
 
     daysTillBirthday(): number {
         const days = this.calcDays(new Date().getFullYear());
-        if (days === -0) {
+        if (-days === 0) {
             return 0;
         }
         return days > 0 ? days : this.calcDays(new Date().getFullYear() + 1);
