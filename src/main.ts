@@ -1,5 +1,7 @@
 import { Plugin } from 'obsidian';
 import { BirthdayTrackerSettings, BirthdayTrackerSettingTab, DEFAULT_SETTINGS } from './settings';
+import Person from './person';
+import Birthday from './birthday';
 
 export default class BirthdayTrackerPlugin extends Plugin {
 	settings: BirthdayTrackerSettings;
@@ -36,15 +38,27 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		for (const file of this.app.vault.getFiles()) {
 			const content = await this.app.vault.read(file);
 			if (content.contains("BIRTHDAY_FILE")) {
-				return content;
+				return content.trim().replace("BIRTHDAY_FILE","").trim();
 			}
 		}
 		return undefined;
 	}
 
 	trackBirthdaysOfContent = async (content: string) => {
-		// handle content
+		const persons: Array<Person> = this.collectPersons(content);
+		persons.forEach(person => console.log(person))
 	};
+
+	collectPersons(content: string): Array<Person> {
+		const persons: Array<Person> = [];
+		const splitChar: string = ";";
+		content.split(/\r?\n/).forEach(person => {
+			const name = person.substring(5, person.search(splitChar));
+			const birthday = person.substring(person.search(splitChar) + 11);
+			persons.push(new Person(name, new Birthday(birthday, this.settings.dateFormatting)));
+		});
+		return persons;
+	}
 
 	async loadSettings() {
 		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
