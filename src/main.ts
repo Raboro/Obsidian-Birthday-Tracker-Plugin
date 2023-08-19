@@ -19,8 +19,6 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		});
 
 		this.addSettingTab(new BirthdayTrackerSettingTab(this.app, this));
-
-		this.registerInterval(window.setInterval(() => console.log('setInterval'), 5 * 60 * 1000));
 	}
 
 	onunload() {
