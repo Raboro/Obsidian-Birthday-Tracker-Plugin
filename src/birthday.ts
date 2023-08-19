@@ -1,6 +1,6 @@
 export default class Birthday {
-	str: string
-    date: Date
+	private str: string
+    private date: Date
 
 	constructor(str: string, dateFormatting: string) {
 		this.str = str
@@ -23,5 +23,9 @@ export default class Birthday {
 
     compareTo(other: Birthday): number {
         return this.date.getTime() - other.date.getTime();
+    }
+
+    toString(): string {
+        return this.str;
     }
 }
