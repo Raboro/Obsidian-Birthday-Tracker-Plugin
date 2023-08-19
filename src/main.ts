@@ -67,7 +67,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 	}
 
 	noticeForAllBirthdaysToday(personsBirthdayToday: Array<Person>): void {
-		let message: string = "Today ";
+		let message = "Today ";
 		personsBirthdayToday.forEach(person => message = message.concat(person.toDTO().name).concat(", "));
 		message = message.substring(0, message.length-2); // remove last not needed ", "
 		new Notice(message.concat((personsBirthdayToday.length > 1 ? " have": " has") + " birthday"));
