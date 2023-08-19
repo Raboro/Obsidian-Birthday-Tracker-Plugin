@@ -50,6 +50,10 @@ export default class Birthday {
         return this.nextBirthday - other.nextBirthday;
     }
 
+    hasBirthdayToday(): boolean {
+        return this.nextBirthday === 0;
+    }
+
     toString(): string {
         return this.str;
     }

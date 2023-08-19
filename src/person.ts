@@ -13,6 +13,10 @@ export default class Person {
 		return this.birthday.compareTo(other.birthday);
 	}
 
+	hasBirthdayToday(): boolean {
+		return this.birthday.hasBirthdayToday();
+	}
+
 	toDTO(): Readonly<PersonDTO> {
 		return new PersonDTO(this.name, this.birthday.toString());
 	}

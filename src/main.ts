@@ -1,4 +1,4 @@
-import { Plugin } from 'obsidian';
+import { Notice, Plugin } from 'obsidian';
 import { BirthdayTrackerSettings, BirthdayTrackerSettingTab, DEFAULT_SETTINGS } from './settings';
 import Person from './person';
 import Birthday from './birthday';
@@ -45,6 +45,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 	trackBirthdaysOfContent = async (content: string) => {
 		const persons: Array<Person> = this.collectPersons(content);
 		persons.sort((p1: Person, p2: Person) => p1.compareTo(p2));
+		this.noticeIfBirthdayToday(persons);
 	};
 
 	collectPersons(content: string): Array<Person> {
@@ -56,6 +57,20 @@ export default class BirthdayTrackerPlugin extends Plugin {
 			persons.push(new Person(name, new Birthday(birthday, this.settings.dateFormatting)));
 		});
 		return persons;
+	}
+
+	noticeIfBirthdayToday(persons: Array<Person>): void {
+		const personsBirthdayToday: Array<Person> = persons.filter(person => person.hasBirthdayToday());
+		if (personsBirthdayToday.length !== 0) {
+			this.noticeForAllBirthdaysToday(personsBirthdayToday);
+		}
+	}
+
+	noticeForAllBirthdaysToday(personsBirthdayToday: Array<Person>): void {
+		let message: string = "Today ";
+		personsBirthdayToday.forEach(person => message = message.concat(person.toDTO().name).concat(", "));
+		message = message.substring(0, message.length-2); // remove last not needed ", "
+		new Notice(message.concat((personsBirthdayToday.length > 1 ? " have": " has") + " birthday"));
 	}
 
 	async loadSettings() {
