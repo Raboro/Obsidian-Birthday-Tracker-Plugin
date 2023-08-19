@@ -2,12 +2,15 @@ import { Notice, Plugin } from 'obsidian';
 import { BirthdayTrackerSettings, BirthdayTrackerSettingTab, DEFAULT_SETTINGS } from './settings';
 import Person from './person';
 import Birthday from './birthday';
+import { BIRTHDAY_TRACKER_VIEW_TYPE, BirthdayTrackerView } from './view';
 
 export default class BirthdayTrackerPlugin extends Plugin {
 	settings: BirthdayTrackerSettings;
 
 	async onload() {
 		await this.loadSettings();
+
+		this.registerView(BIRTHDAY_TRACKER_VIEW_TYPE, (leaf) => new BirthdayTrackerView(leaf));
 
 		const ribbonIconEl = this.addRibbonIcon('cake', 'Track birthdays', this.trackBirthdays);
 		ribbonIconEl.addClass('birthday-tracker-plugin-ribbon-class');
@@ -27,11 +30,19 @@ export default class BirthdayTrackerPlugin extends Plugin {
 	}
 
 	trackBirthdays = async () => {
+		this.openView();
 		const content = await this.fetchContent();
 		if (content) {
 			await this.trackBirthdaysOfContent(content);
 		}
 	};
+
+	openView(): void {
+		this.app.workspace.detachLeavesOfType(BIRTHDAY_TRACKER_VIEW_TYPE);
+		const leaf = this.app.workspace.getRightLeaf(false);
+		leaf.setViewState({type: BIRTHDAY_TRACKER_VIEW_TYPE});
+		this.app.workspace.revealLeaf(leaf);
+	}
 
 	async fetchContent(): Promise<string | undefined> {
 		for (const file of this.app.vault.getFiles()) {
