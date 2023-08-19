@@ -19,6 +19,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		});
 
 		this.addSettingTab(new BirthdayTrackerSettingTab(this.app, this));
+		this.app.workspace.onLayoutReady(() => this.trackBirthdays());
 	}
 
 	onunload() {
