@@ -1,12 +1,12 @@
 # Obsidian-Birthday-Tracker-Plugin
 
-This plugin allows you to keep track of all birthdays of your family and friends. \\
+This plugin allows you to keep track of all birthdays of your family and friends.
 
 ![Demo image](assets/demoImage.png)
 
 ## Using
 You need a file containing all the birthday data.
-This file need to have to find it the text ``BIRTHDAY_FILE``. After that you can add your persons with: \
+To find this file it needs to contain the text ``BIRTHDAY_FILE``. After that you can add your persons with: \
 ``name=<name of the person>; birthday=<date of their birth>`` \
 For example: ``name=Peter Rudolf; birthday=17/08/2033``.
 You need the add all those persons line after line:

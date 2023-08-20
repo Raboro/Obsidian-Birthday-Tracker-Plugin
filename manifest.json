@@ -3,7 +3,7 @@
 	"name": "Birthday-Tracker",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "With this plugin you can keep track of the birthdays of your friends and family members.",
+	"description": "This plugin allows you to keep track of all birthdays of your family and friends.",
 	"author": "Marius Wörfel",
 	"authorUrl": "https://github.com/Raboro",
 	"isDesktopOnly": false
