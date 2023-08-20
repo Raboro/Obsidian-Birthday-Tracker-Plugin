@@ -54,6 +54,10 @@ export default class Birthday {
         return this.nextBirthday === 0;
     }
 
+    getNextBirthdayInDays(): number {
+        return this.nextBirthday;
+    }
+
     toString(): string {
         return this.str;
     }

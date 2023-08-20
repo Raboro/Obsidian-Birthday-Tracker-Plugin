@@ -18,16 +18,18 @@ export default class Person {
 	}
 
 	toDTO(): Readonly<PersonDTO> {
-		return new PersonDTO(this.name, this.birthday.toString());
+		return new PersonDTO(this.name, this.birthday.toString(), this.birthday.getNextBirthdayInDays());
 	}
 }
 
 export class PersonDTO {
 	name: string;
 	birthday: string;
+	nextBirthdayInDays: number;
 
-	constructor(name: string, birthday: string) {
+	constructor(name: string, birthday: string, nextBirthdayInDays: number) {
 		this.name = name;
 		this.birthday = birthday;
+		this.nextBirthdayInDays = nextBirthdayInDays;
 	}
 }
