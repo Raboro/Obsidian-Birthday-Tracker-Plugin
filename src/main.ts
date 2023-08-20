@@ -34,7 +34,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		this.openView();
 		const content = await this.fetchContent();
 		if (content) {
-			await this.trackBirthdaysOfContent(content);
+			this.trackBirthdaysOfContent(content);
 		}
 	};
 
@@ -55,7 +55,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		return undefined;
 	}
 
-	trackBirthdaysOfContent = async (content: string) => {
+	trackBirthdaysOfContent = (content: string) => {
 		this.persons = this.collectPersons(content);
 		this.persons.sort((p1: Person, p2: Person) => p1.compareTo(p2));
 		this.noticeIfBirthdayToday(this.persons);
