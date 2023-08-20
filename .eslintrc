@@ -19,6 +19,7 @@
       "no-prototype-builtins": "off",
       "semi": ["error", "always"],
       "no-var": "error",
+      "quotes": [2, "single", { "avoidEscape": true }],
       "@typescript-eslint/no-empty-function": "off"
     } 
   }
