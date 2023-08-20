@@ -1,0 +1,22 @@
+.personsFlexboxContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.personContainer {
+    border: 3px solid #3D3D3C;
+    border-radius: 10px;
+    transition-duration: .5s;
+    box-shadow: rgb(0 0 0 / 10%) 0 4px 12px;
+}
+
+.personContainer>p {
+    text-align: center;
+}
+
+.personContainer:hover {
+    scale: 1.05;
+    animation-duration: .5s;
+    box-shadow: rgb(0 0 0 / 20%) 0 8px 24px;
+}
