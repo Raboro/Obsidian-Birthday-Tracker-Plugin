@@ -1,8 +1,8 @@
 {
-	"name": "obsidian-sample-plugin",
-	"version": "1.0.0",
-	"description": "This is a sample plugin for Obsidian (https://obsidian.md)",
-	"main": "main.js",
+	"name": "birthday-tracker",
+	"version": "1.0.1",
+	"description": "This plugin allows you to keep track of all birthdays of your family and friends.",
+	"main": "src/main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
@@ -11,7 +11,7 @@
     	"lint": "npx eslint src"
 	},
 	"keywords": [],
-	"author": "",
+	"author": "Marius Wörfel",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/node": "^16.11.6",
