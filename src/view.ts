@@ -24,12 +24,16 @@ export class BirthdayTrackerView extends ItemView {
         const { contentEl } = this;
         contentEl.createEl("h1", {text: "Birthday Tracker"});
         if (this.persons) {
-            this.persons.forEach(person => contentEl.createEl("p", {
-                text: person.toDTO().name + " birthday at: " + person.toDTO().birthday
-            })); 
+            this.displayPersons(contentEl);
         } else {
             contentEl.createEl("h3", {text: "Hit the ribbon icon or command to load birthdays"});
         }
+    }
+
+    displayPersons(contentEl: HTMLElement): void {
+        this.persons.forEach(person => contentEl.createEl("p", {
+            text: person.toDTO().name + " birthday at: " + person.toDTO().birthday
+        })); 
     }
     
 }
