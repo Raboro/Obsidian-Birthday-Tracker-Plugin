@@ -1,5 +1,5 @@
 import { ItemView, WorkspaceLeaf } from "obsidian";
-import Person from "./person";
+import Person, { PersonDTO } from "./person";
 
 export const BIRTHDAY_TRACKER_VIEW_TYPE = "Birthday-Tracker";
 
@@ -31,9 +31,15 @@ export class BirthdayTrackerView extends ItemView {
     }
 
     displayPersons(contentEl: HTMLElement): void {
-        this.persons.forEach(person => contentEl.createEl("p", {
-            text: person.toDTO().name + " birthday at: " + person.toDTO().birthday
-        })); 
+        const container: HTMLDivElement = contentEl.createDiv({cls: "personsFlexboxContainer"});
+        this.persons.forEach(person => this.displayPerson(person.toDTO(), container));
+    }
+
+    displayPerson(person: Readonly<PersonDTO>, container: HTMLDivElement): void {
+        const div: HTMLDivElement = container.createDiv({cls: "personContainer"});
+        div.createEl("p", {text: "Name: " + person.name})
+        div.createEl("p", {text: "Days next birthday: " + person.nextBirthdayInDays})
+        div.createEl("p", {text: "Birthday: "+ person.birthday})
     }
     
 }
