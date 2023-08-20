@@ -48,8 +48,8 @@ export default class BirthdayTrackerPlugin extends Plugin {
 	async fetchContent(): Promise<string | undefined> {
 		for (const file of this.app.vault.getFiles()) {
 			const content = await this.app.vault.read(file);
-			if (content.contains("BIRTHDAY_FILE")) {
-				return content.trim().replace("BIRTHDAY_FILE","").trim();
+			if (content.contains('BIRTHDAY_FILE')) {
+				return content.trim().replace('BIRTHDAY_FILE','').trim();
 			}
 		}
 		return undefined;
@@ -63,7 +63,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 
 	collectPersons(content: string): Array<Person> {
 		const persons: Array<Person> = [];
-		const splitChar = ";";
+		const splitChar = ';';
 		content.split(/\r?\n/).forEach(person => {
 			const name = person.substring(5, person.search(splitChar));
 			const birthday = person.substring(person.search(splitChar) + 11);
@@ -80,10 +80,10 @@ export default class BirthdayTrackerPlugin extends Plugin {
 	}
 
 	noticeForAllBirthdaysToday(personsBirthdayToday: Array<Person>): void {
-		let message = "Today ";
-		personsBirthdayToday.forEach(person => message = message.concat(person.toDTO().name).concat(", "));
+		let message = 'Today ';
+		personsBirthdayToday.forEach(person => message = message.concat(person.toDTO().name).concat(', '));
 		message = message.substring(0, message.length-2); // remove last not needed ", "
-		new Notice(message.concat((personsBirthdayToday.length > 1 ? " have": " has") + " birthday"));
+		new Notice(message.concat((personsBirthdayToday.length > 1 ? ' have': ' has') + ' birthday'));
 	}
 
 	async loadSettings() {

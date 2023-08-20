@@ -1,5 +1,5 @@
-import { App, Notice, PluginSettingTab, Setting } from "obsidian";
-import BirthdayTrackerPlugin from "./main";
+import { App, Notice, PluginSettingTab, Setting } from 'obsidian';
+import BirthdayTrackerPlugin from './main';
 
 export interface BirthdayTrackerSettings {
 	dateFormatting: string;
@@ -33,19 +33,19 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
     }
 
     dateFormattingSettingsOnChange = async (value: string) => {
-        let noticeMessage = "Wrong date formatting!!";
+        let noticeMessage = 'Wrong date formatting!!';
         if (this.isFormattingValid(value)) {
             this.plugin.settings.dateFormatting = value;
             await this.plugin.saveSettings();
-            noticeMessage = "Valid date formatting";
+            noticeMessage = 'Valid date formatting';
         } 
         new Notice(noticeMessage);
     };
 
 	isFormattingValid(format: string): boolean {
-		const containsDoubleD: boolean = this.formatContains("DD", format);
-		const containsDoubleM: boolean = this.formatContains("MM", format);
-		const containsFourY: boolean = this.formatContains("YYYY", format);
+		const containsDoubleD: boolean = this.formatContains('DD', format);
+		const containsDoubleM: boolean = this.formatContains('MM', format);
+		const containsFourY: boolean = this.formatContains('YYYY', format);
 		return containsDoubleD && containsDoubleM && containsFourY && !this.containsInvalidChars(format);
 	}
 
@@ -54,8 +54,8 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
 	}
 
 	containsInvalidChars(format: string): boolean {
-		const invalidChars: string[] = ["A", "B", "C", "E", "F", "G", "H", "I", "J", "K", "L", "N", 
-										"O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Z"];
+		const invalidChars: string[] = ['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'N', 
+										'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Z'];
 		for (const invalidChar in invalidChars) {
 			if (this.formatContains(invalidChar, format)) {
 				return true;

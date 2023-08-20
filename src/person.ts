@@ -1,4 +1,4 @@
-import Birthday from "./birthday";
+import Birthday from './birthday';
 
 export default class Person {
 	private name: string;

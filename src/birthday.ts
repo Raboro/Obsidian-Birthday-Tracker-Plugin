@@ -11,9 +11,9 @@ export default class Birthday {
 
     private convertStringToDate(dateFormatting: string) {
         this.date = this.constructDate(
-            dateFormatting.search("DD"),
-            dateFormatting.search("MM"),
-            dateFormatting.search("YYYY")
+            dateFormatting.search('DD'),
+            dateFormatting.search('MM'),
+            dateFormatting.search('YYYY')
         );
     }
 
