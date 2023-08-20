@@ -37,9 +37,9 @@ export class BirthdayTrackerView extends ItemView {
 
     displayPerson(person: Readonly<PersonDTO>, container: HTMLDivElement): void {
         const div: HTMLDivElement = container.createDiv({cls: "personContainer"});
-        div.createEl("p", {text: "Name: " + person.name})
-        div.createEl("p", {text: "Days next birthday: " + person.nextBirthdayInDays})
-        div.createEl("p", {text: "Birthday: "+ person.birthday})
+        div.createEl("p", {text: "Name: " + person.name});
+        div.createEl("p", {text: "Days next birthday: " + person.nextBirthdayInDays});
+        div.createEl("p", {text: "Birthday: "+ person.birthday});
     }
     
 }
