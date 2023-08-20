@@ -1,7 +1,7 @@
 {
-	"id": "obsidian-birthday-tracker-plugin",
+	"id": "birthday-tracker",
 	"name": "Birthday-Tracker",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"minAppVersion": "0.15.0",
 	"description": "This plugin allows you to keep track of all birthdays of your family and friends.",
 	"author": "Marius Wörfel",
