@@ -1,4 +1,4 @@
-import { Notice, Plugin } from 'obsidian';
+import { Notice, Plugin, WorkspaceLeaf } from 'obsidian';
 import { BirthdayTrackerSettings, BirthdayTrackerSettingTab, DEFAULT_SETTINGS } from './settings';
 import Person from './person';
 import Birthday from './birthday';
@@ -39,10 +39,13 @@ export default class BirthdayTrackerPlugin extends Plugin {
 	};
 
 	openView(): void {
-		this.app.workspace.detachLeavesOfType(BIRTHDAY_TRACKER_VIEW_TYPE);
-		const leaf = this.app.workspace.getRightLeaf(false);
-		leaf.setViewState({type: BIRTHDAY_TRACKER_VIEW_TYPE});
-		this.app.workspace.revealLeaf(leaf);
+		const leaves: WorkspaceLeaf[] = this.app.workspace.getLeavesOfType(BIRTHDAY_TRACKER_VIEW_TYPE);
+		if (leaves.length == 0) {
+			const leaf = this.app.workspace.getRightLeaf(false);
+			leaf.setViewState({type: BIRTHDAY_TRACKER_VIEW_TYPE});
+			leaves[0] = leaf;
+		}
+		this.app.workspace.revealLeaf(leaves[0]);
 	}
 
 	async fetchContent(): Promise<string | undefined> {
