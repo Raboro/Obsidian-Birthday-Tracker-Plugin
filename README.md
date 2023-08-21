@@ -6,7 +6,7 @@ This plugin allows you to keep track of all birthdays of your family and friends
 
 ## Using
 You need a file containing all the birthday data.
-To find this file you need to add the location in the settings. After that you can add your persons with: \
+To find this file you need to add the location in the settings. After that you can add your persons with:
 ``name=<name of the person>; birthday=<date of their birth>`` \
 For example: ``name=Peter Rudolf; birthday=17/08/2033``.
 You need the add all those persons line after line:
