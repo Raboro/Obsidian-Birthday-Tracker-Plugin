@@ -1,7 +1,7 @@
 {
 	"name": "birthday-tracker",
 	"version": "1.0.2",
-	"description": "This plugin allows you to keep track of all birthdays of your family and friends.",
+	"description": "Keep track of all birthdays of your family and friends.",
 	"main": "src/main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
