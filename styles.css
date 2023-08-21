@@ -9,6 +9,7 @@
     border-radius: 10px;
     transition-duration: .5s;
     box-shadow: rgb(0 0 0 / 10%) 0 4px 12px;
+    scale: .95;
 }
 
 .personContainer>p {
@@ -16,7 +17,7 @@
 }
 
 .personContainer:hover {
-    scale: 1.05;
+    scale: .98;
     animation-duration: .5s;
     box-shadow: rgb(0 0 0 / 20%) 0 8px 24px;
 }
