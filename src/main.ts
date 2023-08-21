@@ -1,4 +1,4 @@
-import { Notice, Plugin, WorkspaceLeaf } from 'obsidian';
+import { Notice, Plugin, TFile, WorkspaceLeaf } from 'obsidian';
 import { BirthdayTrackerSettings, BirthdayTrackerSettingTab, DEFAULT_SETTINGS } from './settings';
 import Person from './person';
 import Birthday from './birthday';
@@ -34,17 +34,18 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		const content = await this.fetchContent();
 		if (content) {
 			this.trackBirthdaysOfContent(content);
+			await this.openView();
+		} else {
+			new Notice('Nothing inside your node');	
 		}
-		await this.openView();
 	};
 
 	async fetchContent(): Promise<string | undefined> {
-		for (const file of this.app.vault.getFiles()) {
-			const content = await this.app.vault.read(file);
-			if (content.contains('BIRTHDAY_FILE')) {
-				return content.trim().replace('BIRTHDAY_FILE','').trim();
-			}
+		const file = this.app.vault.getAbstractFileByPath(this.settings.birthdayNodeLocation);
+		if (file && file instanceof TFile) {
+			return (await this.app.vault.read(file)).trim();
 		}
+		new Notice('Node could not be found at location: ' + this.settings.birthdayNodeLocation);
 		return undefined;
 	}
 
