@@ -17,8 +17,8 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		ribbonIconEl.addClass('birthday-tracker-plugin-ribbon-class');
 
 		this.addCommand({
-			id: 'birthday-tracker-track-birthdays',
-			name: 'Track birthdays',
+			id: 'track-birthdays',
+			name: 'Track Birthdays',
 			callback: this.trackBirthdays
 		});
 
