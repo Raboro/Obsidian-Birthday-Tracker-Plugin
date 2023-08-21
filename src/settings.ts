@@ -3,10 +3,12 @@ import BirthdayTrackerPlugin from './main';
 
 export interface BirthdayTrackerSettings {
 	dateFormatting: string;
+	birthdayNodeLocation: string;
 }
 
 export const DEFAULT_SETTINGS: BirthdayTrackerSettings = {
-	dateFormatting: 'DD/MM/YYYY'
+	dateFormatting: 'DD/MM/YYYY',
+	birthdayNodeLocation: 'birthdayNode.md'
 };
 
 export class BirthdayTrackerSettingTab extends PluginSettingTab {
@@ -20,6 +22,7 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
 	display(): void {
 		this.containerEl.empty();
 		this.dateFormattingSettings();
+		this.birthdayNodeLocationSettings();
 	}
 
     dateFormattingSettings(): Setting {
@@ -62,5 +65,18 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
 			}
 		}
 		return false;
+	}
+
+	birthdayNodeLocationSettings(): Setting {
+		return new Setting(this.containerEl)
+        .setName('Birthday Node Location')
+        .setDesc('Location of your Node containing the birthday data with .md as postfix')
+        .addTextArea(text => text
+            .setPlaceholder('Enter the node location')
+            .setValue(this.plugin.settings.birthdayNodeLocation)
+            .onChange(async value => {
+				this.plugin.settings.birthdayNodeLocation = value;
+				await this.plugin.saveSettings();
+			}));
 	}
 }
