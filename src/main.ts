@@ -11,7 +11,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 	async onload() {
 		await this.loadSettings();
 
-		this.registerView(BIRTHDAY_TRACKER_VIEW_TYPE, (leaf) => new BirthdayTrackerView(leaf, this.persons));
+		this.registerView(BIRTHDAY_TRACKER_VIEW_TYPE, (leaf) => new BirthdayTrackerView(leaf));
 
 		const ribbonIconEl = this.addRibbonIcon('cake', 'Track birthdays', this.trackBirthdays);
 		ribbonIconEl.addClass('birthday-tracker-plugin-ribbon-class');
@@ -31,22 +31,12 @@ export default class BirthdayTrackerPlugin extends Plugin {
 	}
 
 	trackBirthdays = async () => {
-		this.openView();
 		const content = await this.fetchContent();
 		if (content) {
 			this.trackBirthdaysOfContent(content);
 		}
+		await this.openView();
 	};
-
-	openView(): void {
-		const leaves: WorkspaceLeaf[] = this.app.workspace.getLeavesOfType(BIRTHDAY_TRACKER_VIEW_TYPE);
-		if (leaves.length == 0) {
-			const leaf = this.app.workspace.getRightLeaf(false);
-			leaf.setViewState({type: BIRTHDAY_TRACKER_VIEW_TYPE});
-			leaves[0] = leaf;
-		}
-		this.app.workspace.revealLeaf(leaves[0]);
-	}
 
 	async fetchContent(): Promise<string | undefined> {
 		for (const file of this.app.vault.getFiles()) {
@@ -87,6 +77,22 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		personsBirthdayToday.forEach(person => message = message.concat(person.toDTO().name).concat(', '));
 		message = message.substring(0, message.length-2); // remove last not needed ", "
 		new Notice(message.concat((personsBirthdayToday.length > 1 ? ' have': ' has') + ' birthday'));
+	}
+
+	async openView(): Promise<void> {
+		const leaves: WorkspaceLeaf[] = this.app.workspace.getLeavesOfType(BIRTHDAY_TRACKER_VIEW_TYPE);
+		if (this.persons) {
+			(await this.getView(leaves)).displayPersons(this.persons);
+		}
+		this.app.workspace.revealLeaf(leaves[0]);
+	}
+
+	async getView(leaves: WorkspaceLeaf[]): Promise<BirthdayTrackerView> {
+		if (leaves.length == 0) {
+			leaves[0] = this.app.workspace.getRightLeaf(false);
+			await leaves[0].setViewState({type: BIRTHDAY_TRACKER_VIEW_TYPE});
+		}
+		return leaves[0].view as BirthdayTrackerView;
 	}
 
 	async loadSettings() {
