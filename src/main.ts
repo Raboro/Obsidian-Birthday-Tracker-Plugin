@@ -58,13 +58,19 @@ export default class BirthdayTrackerPlugin extends Plugin {
 	collectPersons(content: string): Array<Person> {
 		const persons: Array<Person> = [];
 		const splitChar = ';';
-		content.split(/\r?\n/).forEach(person => {
-			const name = person.substring(5, person.search(splitChar));
-			const birthday = person.substring(person.search(splitChar) + 11);
-			persons.push(new Person(name, new Birthday(birthday, this.settings.dateFormatting)));
+		content.split(/\r?\n/).forEach(line => {
+			if (this.lineContainsPerson(line)) {
+				const name = line.substring(5, line.search(splitChar));
+				const birthday = line.substring(line.search(splitChar) + 11);
+				persons.push(new Person(name, new Birthday(birthday, this.settings.dateFormatting)));
+			}
 		});
 		return persons;
 	}
+
+	lineContainsPerson = (line: string) => {
+		return line.contains('name=') && line.contains('birthday=');
+	};
 
 	noticeIfBirthdayToday(persons: Array<Person>): void {
 		const personsBirthdayToday: Array<Person> = persons.filter(person => person.hasBirthdayToday());
