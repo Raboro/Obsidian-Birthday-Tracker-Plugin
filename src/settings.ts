@@ -69,7 +69,7 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
 
 	birthdayNodeLocationSettings(): Setting {
 		return new Setting(this.containerEl)
-        .setName('Birthday Node Location')
+        .setName('Birthday node location')
         .setDesc('Location of your Node containing the birthday data with .md as postfix')
         .addTextArea(text => text
             .setPlaceholder('Enter the node location')
