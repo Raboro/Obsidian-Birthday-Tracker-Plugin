@@ -18,7 +18,8 @@ export default class Person {
 	}
 
 	toDTO(): Readonly<PersonDTO> {
-		return new PersonDTO(this.name, this.birthday.toString(), this.birthday.getNextBirthdayInDays());
+		return new PersonDTO(this.name, this.birthday.toString(), this.birthday.getNextBirthdayInDays(), 
+							 this.birthday.getAge());
 	}
 }
 
@@ -26,10 +27,12 @@ export class PersonDTO {
 	name: string;
 	birthday: string;
 	nextBirthdayInDays: number;
+	age: number;
 
-	constructor(name: string, birthday: string, nextBirthdayInDays: number) {
+	constructor(name: string, birthday: string, nextBirthdayInDays: number, age: number) {
 		this.name = name;
 		this.birthday = birthday;
 		this.nextBirthdayInDays = nextBirthdayInDays;
+		this.age = age;
 	}
 }
