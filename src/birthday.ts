@@ -34,7 +34,7 @@ export default class Birthday {
     }
 
     private determineAge(): number {
-        let age = new Date().getFullYear() - this.date.getFullYear()
+        let age = new Date().getFullYear() - this.date.getFullYear();
         return this.hadBirthdayThisYear() ? age : --age;
     }
 

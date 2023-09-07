@@ -18,8 +18,12 @@ export default class Person {
 	}
 
 	toDTO(): PersonDTO {
-		return new PersonDTO(this.name, this.birthday.toString(), this.birthday.getNextBirthdayInDays(), 
-							 this.birthday.getAge());
+		return new PersonDTO(
+			this.name, 
+			this.birthday.toString(), 
+			this.birthday.getNextBirthdayInDays(), 
+			this.birthday.getAge()
+		);
 	}
 }
 
