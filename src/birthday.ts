@@ -1,11 +1,13 @@
 export default class Birthday {
 	private str: string;
     private date: Date;
+    private age: number;
     private nextBirthday: number;
 
 	constructor(str: string, dateFormatting: string) {
 		this.str = str;
         this.convertStringToDate(dateFormatting);
+        this.age = this.determineAge();
         this.nextBirthday = this.daysTillBirthday();
 	}
 
@@ -20,7 +22,7 @@ export default class Birthday {
     private constructDate(dayIndex: number, monthIndex: number, yearIndex: number): Date {
         const date = new Date();
         date.setFullYear(
-            this.dateNumber(yearIndex, yearIndex+4), 
+            this.dateNumber(yearIndex-1, yearIndex+3), 
             this.dateNumber(monthIndex, monthIndex+2, 1), // month has one offset
             this.dateNumber(dayIndex, dayIndex+2)
         );
@@ -31,7 +33,20 @@ export default class Birthday {
         return parseInt(this.str.substring(start, end)) - (offset ?? 0);
     }
 
-    daysTillBirthday(): number {
+    private determineAge(): number {
+        let age = new Date().getFullYear() - this.date.getFullYear()
+        return this.hadBirthdayThisYear() ? --age : age;
+    }
+
+    private hadBirthdayThisYear(): boolean {
+        const monthPassed = new Date().getMonth() < this.date.getMonth();
+        const daysPassed = new Date().getMonth() === this.date.getMonth() && 
+                           new Date().getDay() < this.date.getDay();
+        return monthPassed || daysPassed;
+    }
+
+
+    private daysTillBirthday(): number {
         const days = this.calcDays(new Date().getFullYear());
         if (-days === 0) {
             return 0;
@@ -52,6 +67,10 @@ export default class Birthday {
 
     hasBirthdayToday(): boolean {
         return this.nextBirthday === 0;
+    }
+
+    getAge(): number {
+        return this.age;
     }
 
     getNextBirthdayInDays(): number {
