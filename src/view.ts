@@ -28,7 +28,7 @@ export class BirthdayTrackerView extends ItemView {
         persons.forEach(person => this.displayPerson(person.toDTO()));
     }
 
-    displayPerson(person: Readonly<PersonDTO>): void {
+    displayPerson(person: PersonDTO): void {
         const div: HTMLDivElement = this.container.createDiv({cls: 'personContainer'});
         div.createEl('p', {text: 'Name: ' + person.name + ' (' + person.age + ')'});
         div.createEl('p', {text: 'Days next birthday: ' + person.nextBirthdayInDays});

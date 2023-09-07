@@ -17,22 +17,16 @@ export default class Person {
 		return this.birthday.hasBirthdayToday();
 	}
 
-	toDTO(): Readonly<PersonDTO> {
+	toDTO(): PersonDTO {
 		return new PersonDTO(this.name, this.birthday.toString(), this.birthday.getNextBirthdayInDays(), 
 							 this.birthday.getAge());
 	}
 }
 
 export class PersonDTO {
-	name: string;
-	birthday: string;
-	nextBirthdayInDays: number;
-	age: number;
-
-	constructor(name: string, birthday: string, nextBirthdayInDays: number, age: number) {
-		this.name = name;
-		this.birthday = birthday;
-		this.nextBirthdayInDays = nextBirthdayInDays;
-		this.age = age;
-	}
+	constructor(
+		readonly name: string, 
+		readonly birthday: string, 
+		readonly nextBirthdayInDays: number,  
+		readonly age: number) {}
 }
