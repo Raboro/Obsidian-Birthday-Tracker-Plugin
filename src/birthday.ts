@@ -35,16 +35,15 @@ export default class Birthday {
 
     private determineAge(): number {
         let age = new Date().getFullYear() - this.date.getFullYear()
-        return this.hadBirthdayThisYear() ? --age : age;
+        return this.hadBirthdayThisYear() ? age : --age;
     }
 
     private hadBirthdayThisYear(): boolean {
-        const monthPassed = new Date().getMonth() < this.date.getMonth();
+        const monthPassed = new Date().getMonth() > this.date.getMonth();
         const daysPassed = new Date().getMonth() === this.date.getMonth() && 
-                           new Date().getDay() < this.date.getDay();
+                           new Date().getDay() >= this.date.getDay();
         return monthPassed || daysPassed;
     }
-
 
     private daysTillBirthday(): number {
         const days = this.calcDays(new Date().getFullYear());
