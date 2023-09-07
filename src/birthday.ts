@@ -22,7 +22,7 @@ export default class Birthday {
     private constructDate(dayIndex: number, monthIndex: number, yearIndex: number): Date {
         const date = new Date();
         date.setFullYear(
-            this.dateNumber(yearIndex-1, yearIndex+3), 
+            this.dateNumber(yearIndex, yearIndex+4), 
             this.dateNumber(monthIndex, monthIndex+2, 1), // month has one offset
             this.dateNumber(dayIndex, dayIndex+2)
         );
