@@ -1,7 +1,7 @@
 {
 	"id": "birthday-tracker",
 	"name": "Birthday-Tracker",
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"minAppVersion": "0.15.0",
 	"description": "Keep track of all birthdays of your family and friends.",
 	"author": "Marius Wörfel",
