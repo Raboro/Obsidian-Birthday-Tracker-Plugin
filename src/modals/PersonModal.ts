@@ -1,5 +1,5 @@
 import { App, Modal } from 'obsidian';
-import { PersonDTO } from './person';
+import { PersonDTO } from '../person';
 
 export default class PersonModal extends Modal {
     private person: PersonDTO;

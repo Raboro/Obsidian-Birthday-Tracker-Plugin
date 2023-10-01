@@ -3,7 +3,7 @@ import { BirthdayTrackerSettings, BirthdayTrackerSettingTab, DEFAULT_SETTINGS } 
 import Person from './person';
 import Birthday from './birthday';
 import { BIRTHDAY_TRACKER_VIEW_TYPE, BirthdayTrackerView } from './view';
-import SearchPersonModal from './SearchPersonModal';
+import SearchPersonModal from './modals/SearchPersonModal';
 
 export default class BirthdayTrackerPlugin extends Plugin {
 	settings: BirthdayTrackerSettings;

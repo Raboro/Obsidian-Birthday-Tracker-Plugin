@@ -1,5 +1,5 @@
 import { App, FuzzySuggestModal } from 'obsidian';
-import { PersonDTO } from './person';
+import { PersonDTO } from '../person';
 import PersonModal from './PersonModal';
 
 export default class SearchPersonModal extends FuzzySuggestModal<PersonDTO> {
