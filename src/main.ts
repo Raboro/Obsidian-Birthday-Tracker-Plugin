@@ -3,6 +3,7 @@ import { BirthdayTrackerSettings, BirthdayTrackerSettingTab, DEFAULT_SETTINGS } 
 import Person from './person';
 import Birthday from './birthday';
 import { BIRTHDAY_TRACKER_VIEW_TYPE, BirthdayTrackerView } from './view';
+import SearchPersonModal from './SearchPersonModal';
 
 export default class BirthdayTrackerPlugin extends Plugin {
 	settings: BirthdayTrackerSettings;
@@ -15,15 +16,24 @@ export default class BirthdayTrackerPlugin extends Plugin {
 
 		const ribbonIconEl = this.addRibbonIcon('cake', 'Track birthdays', this.trackBirthdays);
 		ribbonIconEl.addClass('birthday-tracker-plugin-ribbon-class');
+		
+		this.addCommands();
 
+		this.addSettingTab(new BirthdayTrackerSettingTab(this.app, this));
+		this.app.workspace.onLayoutReady(() => this.trackBirthdays());
+	}
+
+	private addCommands() {
 		this.addCommand({
 			id: 'track-birthdays',
 			name: 'Track Birthdays',
 			callback: this.trackBirthdays
 		});
-
-		this.addSettingTab(new BirthdayTrackerSettingTab(this.app, this));
-		this.app.workspace.onLayoutReady(() => this.trackBirthdays());
+		this.addCommand({
+			id: 'search-person',
+			name: 'Search Person',
+			callback: this.searchPerson
+		});
 	}
 
 	onunload() {
@@ -101,6 +111,15 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		}
 		return leaves[0].view as BirthdayTrackerView;
 	}
+
+	searchPerson = async () => {
+		await this.fetchContent();
+        if (this.persons.length >= 1) {
+			new SearchPersonModal(this.app, this.persons.map(person => person.toDTO())).open();
+        } else {
+            new Notice('No persons were found');
+        }
+    };
 
 	async loadSettings() {
 		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
