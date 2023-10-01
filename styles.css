@@ -21,3 +21,7 @@
     animation-duration: .5s;
     box-shadow: rgb(0 0 0 / 20%) 0 8px 24px;
 }
+
+.smallerScale:hover {
+    scale: .96;
+}
