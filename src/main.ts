@@ -44,7 +44,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		const content = await this.fetchContent();
 		if (content) {
 			this.trackBirthdaysOfContent(content);
-			await this.openView();
+			await this.openBirthdayView();
 		} else {
 			new Notice('Nothing inside your node');	
 		}
@@ -96,15 +96,15 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		new Notice(message.concat((personsBirthdayToday.length > 1 ? ' have': ' has') + ' birthday'));
 	}
 
-	async openView(): Promise<void> {
+	async openBirthdayView(): Promise<void> {
 		const leaves: WorkspaceLeaf[] = this.app.workspace.getLeavesOfType(BIRTHDAY_TRACKER_VIEW_TYPE);
 		if (this.persons) {
-			(await this.getView(leaves)).displayPersons(this.persons);
+			(await this.getBirthdayView(leaves)).displayPersons(this.persons);
 		}
 		this.app.workspace.revealLeaf(leaves[0]);
 	}
 
-	async getView(leaves: WorkspaceLeaf[]): Promise<BirthdayTrackerView> {
+	async getBirthdayView(leaves: WorkspaceLeaf[]): Promise<BirthdayTrackerView> {
 		if (leaves.length == 0) {
 			leaves[0] = this.app.workspace.getRightLeaf(false);
 			await leaves[0].setViewState({type: BIRTHDAY_TRACKER_VIEW_TYPE});
