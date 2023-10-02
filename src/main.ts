@@ -128,7 +128,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		const persons: Person[] = await this.getPersons();
 		await (leaves[0].view as YearOverviewView).updatePersons(persons.map(p => p.toDTO()));
 		this.app.workspace.revealLeaf(leaves[0]);
-	}
+	};
 
 	async getPersons(): Promise<Person[]> {
 		const content = await this.fetchContent();
