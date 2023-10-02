@@ -50,3 +50,7 @@
     height: 16vh;
     overflow-y: scroll;
 }
+
+.personsYearViewContainer>p {
+    text-align: center;
+}
