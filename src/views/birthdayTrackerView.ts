@@ -1,5 +1,5 @@
 import { ItemView } from 'obsidian';
-import Person, { PersonDTO } from './person';
+import Person, { PersonDTO } from '../person';
 
 export const BIRTHDAY_TRACKER_VIEW_TYPE = 'Birthday-Tracker';
 
