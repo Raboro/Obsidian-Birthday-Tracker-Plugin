@@ -22,7 +22,8 @@ export default class Person {
 			this.name, 
 			this.birthday.toString(), 
 			this.birthday.getNextBirthdayInDays(), 
-			this.birthday.getAge()
+			this.birthday.getAge(),
+			this.birthday.getMonth()
 		);
 	}
 }
@@ -32,5 +33,6 @@ export class PersonDTO {
 		readonly name: string, 
 		readonly birthday: string, 
 		readonly nextBirthdayInDays: number,  
-		readonly age: number) {}
+		readonly age: number,
+		readonly month: number) {}
 }

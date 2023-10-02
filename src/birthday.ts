@@ -76,6 +76,10 @@ export default class Birthday {
         return this.nextBirthday;
     }
 
+    getMonth(): number {
+        return this.date.getMonth();
+    }
+
     toString(): string {
         return this.str;
     }
