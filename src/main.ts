@@ -2,7 +2,7 @@ import { Notice, Plugin, TFile, WorkspaceLeaf } from 'obsidian';
 import { BirthdayTrackerSettings, BirthdayTrackerSettingTab, DEFAULT_SETTINGS } from './settings';
 import Person from './person';
 import Birthday from './birthday';
-import { BIRTHDAY_TRACKER_VIEW_TYPE, BirthdayTrackerView } from './view';
+import { BIRTHDAY_TRACKER_VIEW_TYPE, BirthdayTrackerView } from './views/view';
 import SearchPersonModal from './modals/SearchPersonModal';
 
 export default class BirthdayTrackerPlugin extends Plugin {
