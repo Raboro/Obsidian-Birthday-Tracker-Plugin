@@ -53,4 +53,5 @@
 
 .personsYearViewContainer>p {
     text-align: center;
+    cursor: pointer;
 }

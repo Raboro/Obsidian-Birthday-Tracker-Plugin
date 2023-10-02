@@ -1,4 +1,5 @@
 import { ItemView } from "obsidian";
+import PersonModal from "src/modals/PersonModal";
 import { PersonDTO } from "src/person";
 
 export const BIRTHDAY_TRACKER_YEAR_OVERVIEW_VIEW_TYPE = "Birthday-Tracker-Year-Overview";
@@ -26,8 +27,13 @@ export class YearOverviewView extends ItemView {
             month.createEl("h4", {text:MONTHS[i], cls:"monthName"})
             const personContainer = month.createDiv({cls:"personsYearViewContainer"})
             if (this.persons.length === 0) continue;
-            this.persons.filter(p => p.month == i).forEach(p => personContainer.createEl("p", {text:p.name}))
+            this.persons.filter(p => p.month == i).forEach(person => this.createPerson(person, personContainer))
         }
+    }
+
+    createPerson = (person: PersonDTO, personContainer: HTMLDivElement) => {
+        const para = personContainer.createEl("p", {text:person.name});
+        para.onclick = () => new PersonModal(this.app, person).open();
     }
 
     async updatePersons(persons: PersonDTO[]) {
