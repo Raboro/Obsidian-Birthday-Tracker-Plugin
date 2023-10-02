@@ -4,6 +4,7 @@ import Person from './person';
 import Birthday from './birthday';
 import { BIRTHDAY_TRACKER_VIEW_TYPE, BirthdayTrackerView } from './views/birthdayTrackerView';
 import SearchPersonModal from './modals/SearchPersonModal';
+import { BIRTHDAY_TRACKER_YEAR_OVERVIEW_VIEW_TYPE, YearOverviewView } from './views/yearOverviewView';
 
 export default class BirthdayTrackerPlugin extends Plugin {
 	settings: BirthdayTrackerSettings;
@@ -13,6 +14,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 		await this.loadSettings();
 
 		this.registerView(BIRTHDAY_TRACKER_VIEW_TYPE, (leaf) => new BirthdayTrackerView(leaf));
+		this.registerView(BIRTHDAY_TRACKER_YEAR_OVERVIEW_VIEW_TYPE, (leaf) => new YearOverviewView(leaf));
 
 		const ribbonIconEl = this.addRibbonIcon('cake', 'Track birthdays', this.trackBirthdays);
 		ribbonIconEl.addClass('birthday-tracker-plugin-ribbon-class');
@@ -33,6 +35,11 @@ export default class BirthdayTrackerPlugin extends Plugin {
 			id: 'search-person',
 			name: 'Search Person',
 			callback: this.searchPerson
+		});
+		this.addCommand({
+			id: 'year-overview',
+			name: 'Year Overview',
+			callback: this.openYearView
 		});
 	}
 
@@ -110,6 +117,15 @@ export default class BirthdayTrackerPlugin extends Plugin {
 			await leaves[0].setViewState({type: BIRTHDAY_TRACKER_VIEW_TYPE});
 		}
 		return leaves[0].view as BirthdayTrackerView;
+	}
+
+	openYearView = async (): Promise<void> => {
+		const leaves: WorkspaceLeaf[] = this.app.workspace.getLeavesOfType(BIRTHDAY_TRACKER_YEAR_OVERVIEW_VIEW_TYPE);
+		if (leaves.length == 0) {
+			leaves[0] = this.app.workspace.getLeaf(false);
+			await leaves[0].setViewState({type: BIRTHDAY_TRACKER_YEAR_OVERVIEW_VIEW_TYPE});
+		}
+		this.app.workspace.revealLeaf(leaves[0]);
 	}
 
 	searchPerson = async () => {
