@@ -38,3 +38,7 @@
 .monthContainer {
     border: 3px solid #3D3D3C;
 }
+
+.monthName {
+    text-align: center;
+}
