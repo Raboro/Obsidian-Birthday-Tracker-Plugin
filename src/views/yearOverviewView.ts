@@ -22,6 +22,7 @@ export class YearOverviewView extends ItemView {
         for (let i = 0; i < 12; i++) {
             const month = container.createDiv({cls:"monthContainer"});
             month.createEl("h4", {text:MONTHS[i], cls:"monthName"})
+            const personContainer = month.createDiv({cls:"personsYearViewContainer"})
         }
     }
 }

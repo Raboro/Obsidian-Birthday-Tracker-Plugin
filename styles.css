@@ -32,7 +32,7 @@
     border: 3px solid #3D3D3C;
     border-radius: 10px;
     margin-top: 5vh;
-    height: 80%;
+    height: 86%;
 }
 
 .monthContainer {
@@ -41,4 +41,12 @@
 
 .monthName {
     text-align: center;
+}
+
+.personsYearViewContainer {
+    border: 3px solid #3D3D3C;
+    border-radius: 10px;
+    margin: 2vh 2vw;
+    height: 16vh;
+    overflow-y: scroll;
 }
