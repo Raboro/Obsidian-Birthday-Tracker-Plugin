@@ -34,3 +34,7 @@
     margin-top: 5vh;
     height: 80%;
 }
+
+.monthContainer {
+    border: 3px solid #3D3D3C;
+}
