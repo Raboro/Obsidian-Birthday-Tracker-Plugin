@@ -23,6 +23,12 @@ name=Mats Mattis; birthday=21/03/1999
 After that you can click on the ribbon icon or use the command to trigger the plugin. \
 You will receive a notice for all persons who have birthday today and get in a separate view an overview over all persons sorted by their next birthday.
 
+### Year View
+You can also use the **Year View** to get an overview over all birthdays. You can also click on the names to get more infomation of this person.
+
+![image](https://github.com/Raboro/Obsidian-Birthday-Tracker-Plugin/assets/88288557/9b2a1915-3e2a-42e7-ba94-e6140b484ff4)
+
+
 ## Settings
 You can set a date formatting. The default is: ``DD/MM/YYYY``. This is needed to collect your dates and display them. Also you can set the location of the file containing the birthday data. This must include `.md` as postfix. The default value is: `birthdayNode.md`
 
