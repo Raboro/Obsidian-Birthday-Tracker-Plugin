@@ -18,6 +18,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 
 		const ribbonIconEl = this.addRibbonIcon('cake', 'Track birthdays', this.trackBirthdays);
 		ribbonIconEl.addClass('birthday-tracker-plugin-ribbon-class');
+		this.addRibbonIcon('calendar-days', 'Open year overview', this.openYearView);
 		
 		this.addCommands();
 
