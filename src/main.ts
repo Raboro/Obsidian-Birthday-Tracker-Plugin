@@ -115,7 +115,9 @@ export default class BirthdayTrackerPlugin extends Plugin {
 	async getBirthdayView(leaves: WorkspaceLeaf[]): Promise<BirthdayTrackerView> {
 		if (leaves.length == 0) {
 			leaves[0] = this.app.workspace.getRightLeaf(false);
-			await leaves[0].setViewState({type: BIRTHDAY_TRACKER_VIEW_TYPE});
+			if (leaves[0]) {
+				await leaves[0].setViewState({type: BIRTHDAY_TRACKER_VIEW_TYPE});
+			}
 		}
 		return leaves[0].view as BirthdayTrackerView;
 	}
