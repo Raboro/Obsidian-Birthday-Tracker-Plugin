@@ -75,11 +75,11 @@ export default class BirthdayTrackerPlugin extends Plugin {
 
 	collectPersons(content: string): Array<Person> {
 		const persons: Array<Person> = [];
-		const splitChar = ';';
 		content.split(/\r?\n/).forEach(line => {
 			if (this.lineContainsPerson(line)) {
-				const name = line.substring(5, line.search(splitChar));
-				const birthday = line.substring(line.search(splitChar) + 11);
+				const splittedLine = line.split(';');
+				const name = splittedLine[0]?.trim().split("=").last()?.trim() ?? "";
+				const birthday = splittedLine[1]?.replace(" ", "").split("=").last()?.trim() ?? "";
 				persons.push(new Person(name, new Birthday(birthday, this.settings.dateFormatting)));
 			}
 		});
