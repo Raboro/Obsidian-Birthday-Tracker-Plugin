@@ -1,6 +1,6 @@
 {
 	"name": "birthday-tracker",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"description": "Keep track of all birthdays of your family and friends.",
 	"main": "src/main.js",
 	"scripts": {
