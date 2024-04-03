@@ -4,7 +4,7 @@ import { PersonDTO } from 'src/person';
 
 export const BIRTHDAY_TRACKER_YEAR_OVERVIEW_VIEW_TYPE = 'Birthday-Tracker-Year-Overview';
 
-const MONTHS = ['January', 'February', 'March', 'April', 'Mai', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export class YearOverviewView extends ItemView {
     icon = 'calendar-days';
