@@ -33,7 +33,13 @@ jobs:
               run: |
                   tag="${GITHUB_REF#refs/tags/}"
 
+                  notes_file="release-notes.md"
+                  notes_option=""
+                  if [ -f "$notes_file" ]; then
+                      notes_option="--notes-file=$notes_file"
+                  fi
+
                   gh release create "$tag" \
-                    --title="$tag" \
-                    --draft \
-                    main.js styles.css manifest.json
+                      --title="$tag" \
+                      $notes_option \
+                      main.js manifest.json styles.css
