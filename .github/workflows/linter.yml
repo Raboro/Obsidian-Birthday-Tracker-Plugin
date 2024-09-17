@@ -12,15 +12,17 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
+
+            - name: Setup bun
+              uses: oven-sh/setup-bun@v2
               with:
-                  node-version: 18
+                  bun-version: latest
 
             - name: Install dependencies
-              run: npm install
+              run: bun install
 
             - name: Fix eslint issues
-              run: npm run lint:fix
+              run: bun run lint:fix
 
             - name: Commit changes
               run: |
@@ -35,4 +37,4 @@ jobs:
                   branch: ${{ github.ref }}
 
             - name: Run eslint
-              run: npm run lint
+              run: bun run lint
