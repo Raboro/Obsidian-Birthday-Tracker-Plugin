@@ -41,7 +41,7 @@ export default class Birthday {
     private hadBirthdayThisYear(): boolean {
         const monthPassed = new Date().getMonth() > this.date.getMonth();
         const daysPassed = new Date().getMonth() === this.date.getMonth() && 
-                           new Date().getDay() >= this.date.getDay();
+                           new Date().getDate() >= this.date.getDate();//getDay returns Day of the week, getDate the Day number
         return monthPassed || daysPassed;
     }
 
