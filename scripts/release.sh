@@ -2,7 +2,7 @@
 
 echo -e "\nupdate version in manifest.json/package.json and version.json"
 
-npm run version
+bun run version
 
 current_version=$(node -pe "require('./manifest.json').version")
 package_version=$(node -pe "require('./package.json').version")
