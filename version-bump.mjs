@@ -1,14 +1,29 @@
-import { readFileSync, writeFileSync } from "fs";
+import { execSync } from 'node:child_process';
+import { readFileSync, writeFileSync } from 'node:fs';
 
-const targetVersion = process.env.npm_package_version;
+const highestTag = execSync('git describe --tags --abbrev=0').toString().trim();
 
-// read minAppVersion from manifest.json and bump version to target version
-let manifest = JSON.parse(readFileSync("manifest.json", "utf8"));
-const { minAppVersion } = manifest;
-manifest.version = targetVersion;
-writeFileSync("manifest.json", JSON.stringify(manifest, null, "\t"));
+const incrementVersion = (version) => {
+    const [major, minor, patch] = version.split('.').map(Number);
+    if (patch < 9) {
+        return `${major}.${minor}.${patch + 1}`;
+    }
+    if (minor < 9) {
+        return `${major}.${minor + 1}.0`;
+    }
+    return `${major + 1}.0.0`;
+};
 
-// update versions.json with target version and minAppVersion from manifest.json
-let versions = JSON.parse(readFileSync("versions.json", "utf8"));
+function updateVersion(name) {
+    const file = JSON.parse(readFileSync(name, 'utf-8'));
+    file.version = targetVersion;
+    writeFileSync(name, JSON.stringify(file, null, '\t'));
+}
+
+const targetVersion = incrementVersion(highestTag);
+updateVersion('manifest.json');
+const { minAppVersion } = JSON.parse(readFileSync('manifest.json', 'utf8'));
+const versions = JSON.parse(readFileSync('versions.json', 'utf8'));
 versions[targetVersion] = minAppVersion;
-writeFileSync("versions.json", JSON.stringify(versions, null, "\t"));
+writeFileSync('versions.json', JSON.stringify(versions, null, '\t'));
+updateVersion('package.json');
