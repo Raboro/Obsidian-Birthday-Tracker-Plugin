@@ -1,8 +1,7 @@
 # Obsidian-Birthday-Tracker-Plugin
 
 [![Latest Release](https://img.shields.io/github/v/release/Raboro/Obsidian-Birthday-Tracker-Plugin?include_prereleases&sort=semver&style=for-the-badge)](https://github.com/Raboro/Obsidian-Birthday-Tracker-Plugin/releases/latest) [![Total Downloads](https://img.shields.io/github/downloads/Raboro/Obsidian-Birthday-Tracker-Plugin/total?style=for-the-badge)](https://github.com/Raboro/Obsidian-Birthday-Tracker-Plugin/releases/latest)
-[![Linter Workflow Status](https://img.shields.io/github/actions/workflow/status/Raboro/Obsidian-Birthday-Tracker-Plugin/linter.yml?branch=master&logo=github&style=for-the-badge)](https://github.com/Raboro/Obsidian-Birthday-Tracker-Plugin/actions/workflows/linter.yml)
-[![Release Workflow Status](https://img.shields.io/github/actions/workflow/status/Raboro/Obsidian-Birthday-Tracker-Plugin/release.yml?branch=master&logo=github&style=for-the-badge)](https://github.com/Raboro/Obsidian-Birthday-Tracker-Plugin/actions/workflows/release.yml)
+[![CI Workflow Status](https://img.shields.io/github/actions/workflow/status/Raboro/Obsidian-Birthday-Tracker-Plugin/ci.yml?branch=master&logo=github&style=for-the-badge)](https://github.com/Raboro/Obsidian-Birthday-Tracker-Plugin/actions/workflows/ci.yml)
 
 This plugin allows you to keep track of all birthdays of your family and friends.
 
