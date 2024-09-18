@@ -1,25 +1,24 @@
-import { App, FuzzySuggestModal } from 'obsidian';
-import { PersonDTO } from '../person';
+import { type App, FuzzySuggestModal } from 'obsidian';
+import type { PersonDTO } from '../person';
 import PersonModal from './PersonModal';
 
 export default class SearchPersonModal extends FuzzySuggestModal<PersonDTO> {
-    private persons: PersonDTO[];
+  private persons: PersonDTO[];
 
-    constructor(app: App, persons: PersonDTO[]) {
-        super(app);
-        this.persons = persons;
-    }
+  constructor(app: App, persons: PersonDTO[]) {
+    super(app);
+    this.persons = persons;
+  }
 
-    getItems(): PersonDTO[] {
-        return this.persons;
-    }
+  getItems(): PersonDTO[] {
+    return this.persons;
+  }
 
-    getItemText(item: PersonDTO): string {
-        return item.name;
-    }
+  getItemText(item: PersonDTO): string {
+    return item.name;
+  }
 
-    onChooseItem(item: PersonDTO, evt: MouseEvent | KeyboardEvent): void {
-        new PersonModal(this.app, item).open();
-    }
-
+  onChooseItem(item: PersonDTO, evt: MouseEvent | KeyboardEvent): void {
+    new PersonModal(this.app, item).open();
+  }
 }
