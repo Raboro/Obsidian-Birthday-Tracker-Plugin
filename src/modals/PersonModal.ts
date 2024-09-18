@@ -15,12 +15,12 @@ export default class PersonModal extends Modal {
       cls: 'personContainer smallerScale',
     });
     div.createEl('p', {
-      text: 'Name: ' + this.person.name + ' (' + this.person.age + ')',
+      text: `Name: ${this.person.name} (${this.person.age})`,
     });
     div.createEl('p', {
-      text: 'Days next birthday: ' + this.person.nextBirthdayInDays,
+      text: `Days next birthday: ${this.person.nextBirthdayInDays}`,
     });
-    div.createEl('p', { text: 'Birthday: ' + this.person.birthday });
+    div.createEl('p', { text: `Birthday: ${this.person.birthday}` });
   }
 
   onClose(): void {

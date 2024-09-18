@@ -44,7 +44,7 @@ export class YearOverviewView extends ItemView {
       });
       if (this.persons.length === 0) continue;
       this.persons
-        .filter((p) => p.month == i)
+        .filter((p) => p.month === i)
         .forEach((person) => this.createPerson(person, personContainer));
     }
   }

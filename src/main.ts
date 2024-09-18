@@ -88,8 +88,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
       return (await this.app.vault.read(file)).trim();
     }
     new Notice(
-      'Node could not be found at location: ' +
-        this.settings.birthdayNodeLocation,
+      `Node could not be found at location: ${this.settings.birthdayNodeLocation}`,
     );
     return undefined;
   }
@@ -140,7 +139,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
     message = message.substring(0, message.length - 2); // remove last not needed ", "
     new Notice(
       message.concat(
-        (personsBirthdayToday.length > 1 ? ' have' : ' has') + ' birthday',
+        `${personsBirthdayToday.length > 1 ? ' have' : ' has'} birthday`,
       ),
     );
   }
@@ -156,7 +155,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
   }
 
   async getBirthdayView(leaves: WorkspaceLeaf[]): Promise<BirthdayTrackerView> {
-    if (leaves.length == 0) {
+    if (leaves.length === 0) {
       const leaf: WorkspaceLeaf | null = this.app.workspace.getRightLeaf(false);
       if (leaf) {
         leaves[0] = leaf;
@@ -170,7 +169,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
     const leaves: WorkspaceLeaf[] = this.app.workspace.getLeavesOfType(
       BIRTHDAY_TRACKER_YEAR_OVERVIEW_VIEW_TYPE,
     );
-    if (leaves.length == 0) {
+    if (leaves.length === 0) {
       leaves[0] = this.app.workspace.getLeaf(false);
       await leaves[0].setViewState({
         type: BIRTHDAY_TRACKER_YEAR_OVERVIEW_VIEW_TYPE,
