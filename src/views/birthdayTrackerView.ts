@@ -26,6 +26,7 @@ export class BirthdayTrackerView extends ItemView {
     while (this.container.firstChild) {
       this.container.removeChild(this.container.lastChild as Node);
     }
+    // biome-ignore lint: performance issue to use for..of not relevant
     persons.forEach((person) => this.displayPerson(person.toDTO()));
   }
 

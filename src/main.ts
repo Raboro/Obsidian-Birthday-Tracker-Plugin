@@ -101,6 +101,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
 
   collectPersons(content: string): Array<Person> {
     const persons: Array<Person> = [];
+    // biome-ignore lint: performance issue to use for..of not relevant
     content.split(/\r?\n/).forEach((line) => {
       if (this.lineContainsPerson(line)) {
         const splittedLine = line.split(';');
@@ -133,7 +134,9 @@ export default class BirthdayTrackerPlugin extends Plugin {
 
   noticeForAllBirthdaysToday(personsBirthdayToday: Array<Person>): void {
     let message = 'Today ';
+    // biome-ignore lint: performance issue to use for..of not relevant
     personsBirthdayToday.forEach(
+      // biome-ignore lint: message can be overwritten here
       (person) => (message = message.concat(person.toDTO().name).concat(', ')),
     );
     message = message.substring(0, message.length - 2); // remove last not needed ", "
