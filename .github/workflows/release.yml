@@ -1,9 +1,9 @@
 name: Release Obsidian plugin
 
 on:
-    workflow_run: # only release if Linter finds no errors
+    workflow_run: # only release if CI passes
         workflows:
-            - "Linter"
+            - "CI"
         types:
             - completed
     push:
