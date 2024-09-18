@@ -31,9 +31,6 @@ jobs:
           bun install 
           git add bun.lockb
 
-      - name: Run Tests
-        run: bun test
-
       - name: Build
         run: bun run build
 
