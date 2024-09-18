@@ -2,7 +2,7 @@
 
 echo -e "\ntry to fix all issues if present"
 
-bun run bione:write
+bun run biome:write
 
 git commit -am "refactor(GHActionbot): :art: formatted & linting & organized imports with biome"
 
