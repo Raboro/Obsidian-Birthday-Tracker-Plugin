@@ -1,4 +1,4 @@
-name: Linter
+name: CI
 
 on:
     push:
@@ -7,8 +7,8 @@ on:
     workflow_dispatch:
 
 jobs:
-    linter:
-        name: Linter
+    ci:
+        name: CI
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
@@ -21,14 +21,14 @@ jobs:
             - name: Install dependencies
               run: bun install
 
-            - name: Fix eslint issues
-              run: bun run lint:fix
+            - name: Fix biome issues
+              run: bun run biome:write
 
             - name: Commit changes
               run: |
                   git config user.name github-actions[bot]
                   git config user.email github-actions[bot]@users.noreply.github.com
-                  git commit -am "fixed eslint issues" || true
+                  git commit -am "refactor(GHActionbot): :art: formatted & linting & organized imports with biome" || true
 
             - name: Push changes
               uses: ad-m/github-push-action@master
@@ -36,5 +36,5 @@ jobs:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   branch: ${{ github.ref }}
 
-            - name: Run eslint
-              run: bun run lint
+            - name: Check if all issues are fixed with biome
+              run: bun run biome:ci

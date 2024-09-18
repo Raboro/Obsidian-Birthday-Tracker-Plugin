@@ -1,57 +1,57 @@
 .personsFlexboxContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 2vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
 }
 
 .personContainer {
-    border: 3px solid #3D3D3C;
-    border-radius: 10px;
-    transition-duration: .5s;
-    box-shadow: rgb(0 0 0 / 10%) 0 4px 12px;
-    scale: .95;
+  border: 3px solid #3d3d3c;
+  border-radius: 10px;
+  transition-duration: .5s;
+  box-shadow: rgb(0 0 0 / 10%) 0 4px 12px;
+  scale: 0.95;
 }
 
-.personContainer>p {
-    text-align: center;
+.personContainer > p {
+  text-align: center;
 }
 
 .personContainer:hover {
-    scale: .98;
-    animation-duration: .5s;
-    box-shadow: rgb(0 0 0 / 20%) 0 8px 24px;
+  scale: 0.98;
+  animation-duration: .5s;
+  box-shadow: rgb(0 0 0 / 20%) 0 8px 24px;
 }
 
 .smallerScale:hover {
-    scale: .96;
+  scale: 0.96;
 }
 
 .yearContainer {
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    border: 3px solid #3D3D3C;
-    border-radius: 10px;
-    margin-top: 5vh;
-    height: 86%;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  border: 3px solid #3d3d3c;
+  border-radius: 10px;
+  margin-top: 5vh;
+  height: 86%;
 }
 
 .monthContainer {
-    border: 3px solid #3D3D3C;
+  border: 3px solid #3d3d3c;
 }
 
 .monthName {
-    text-align: center;
+  text-align: center;
 }
 
 .personsYearViewContainer {
-    border: 3px solid #3D3D3C;
-    border-radius: 10px;
-    margin: 2vh 2vw;
-    height: 16vh;
-    overflow-y: scroll;
+  border: 3px solid #3d3d3c;
+  border-radius: 10px;
+  margin: 2vh 2vw;
+  height: 16vh;
+  overflow-y: scroll;
 }
 
-.personsYearViewContainer>p {
-    text-align: center;
-    cursor: pointer;
+.personsYearViewContainer > p {
+  text-align: center;
+  cursor: pointer;
 }
