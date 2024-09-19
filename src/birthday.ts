@@ -34,7 +34,10 @@ export default class Birthday {
   }
 
   private dateNumber(start: number, end: number, offset?: number): number {
-    return Number.parseInt(this.birthdayAsString.substring(start, end)) - (offset ?? 0);
+    return (
+      Number.parseInt(this.birthdayAsString.substring(start, end)) -
+      (offset ?? 0)
+    );
   }
 
   private determineAge(): number {
