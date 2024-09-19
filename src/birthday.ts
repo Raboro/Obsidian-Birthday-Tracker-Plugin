@@ -1,11 +1,11 @@
 export default class Birthday {
-  private str: string;
+  private birthdayAsString: string;
   private date: Date;
   private age: number;
   private nextBirthday: number;
 
-  constructor(str: string, dateFormatting: string) {
-    this.str = str;
+  constructor(birthdayAsString: string, dateFormatting: string) {
+    this.birthdayAsString = birthdayAsString;
     this.convertStringToDate(dateFormatting);
     this.age = this.determineAge();
     this.nextBirthday = this.daysTillBirthday();
@@ -34,7 +34,7 @@ export default class Birthday {
   }
 
   private dateNumber(start: number, end: number, offset?: number): number {
-    return Number.parseInt(this.str.substring(start, end)) - (offset ?? 0);
+    return Number.parseInt(this.birthdayAsString.substring(start, end)) - (offset ?? 0);
   }
 
   private determineAge(): number {
@@ -86,6 +86,6 @@ export default class Birthday {
   }
 
   toString(): string {
-    return this.str;
+    return this.birthdayAsString;
   }
 }
