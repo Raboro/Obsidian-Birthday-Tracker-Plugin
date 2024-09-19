@@ -21,7 +21,7 @@ export default class Person {
     return new PersonDTO(
       this.name,
       this.birthday.toString(),
-      this.birthday.getNextBirthdayInDays(),
+      this.birthday.getDaysTillNextBirthday(),
       this.birthday.getAge(),
       this.birthday.getMonth(),
     );
@@ -32,7 +32,7 @@ export class PersonDTO {
   constructor(
     readonly name: string,
     readonly birthday: string,
-    readonly nextBirthdayInDays: number,
+    readonly daysTillNextBirthday: number,
     readonly age: number,
     readonly month: number,
   ) {}

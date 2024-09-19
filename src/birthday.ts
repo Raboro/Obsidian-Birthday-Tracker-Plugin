@@ -2,13 +2,13 @@ export default class Birthday {
   private birthdayAsString: string;
   private date: Date;
   private age: number;
-  private nextBirthday: number;
+  private daysTillNextBirthday: number;
 
   constructor(birthdayAsString: string, dateFormatting: string) {
     this.birthdayAsString = birthdayAsString;
     this.convertStringToDate(dateFormatting);
     this.age = this.determineAge();
-    this.nextBirthday = this.daysTillBirthday();
+    this.daysTillNextBirthday = this.calcDaysTillNextBirthday();
   }
 
   private convertStringToDate(dateFormatting: string) {
@@ -50,7 +50,7 @@ export default class Birthday {
     return monthPassed || daysPassed;
   }
 
-  private daysTillBirthday(): number {
+  private calcDaysTillNextBirthday(): number {
     const days = this.calcDays(new Date().getFullYear());
     if (-days === 0) {
       return 0;
@@ -66,19 +66,19 @@ export default class Birthday {
   }
 
   compareTo(other: Birthday): number {
-    return this.nextBirthday - other.nextBirthday;
+    return this.daysTillNextBirthday - other.daysTillNextBirthday;
   }
 
   hasBirthdayToday(): boolean {
-    return this.nextBirthday === 0;
+    return this.daysTillNextBirthday === 0;
   }
 
   getAge(): number {
     return this.age;
   }
 
-  getNextBirthdayInDays(): number {
-    return this.nextBirthday;
+  getDaysTillNextBirthday(): number {
+    return this.daysTillNextBirthday;
   }
 
   getMonth(): number {

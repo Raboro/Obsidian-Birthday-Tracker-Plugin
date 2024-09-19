@@ -18,7 +18,7 @@ export default class PersonModal extends Modal {
       text: `Name: ${this.person.name} (${this.person.age})`,
     });
     div.createEl('p', {
-      text: `Days next birthday: ${this.person.nextBirthdayInDays}`,
+      text: `Days next birthday: ${this.person.daysTillNextBirthday}`,
     });
     div.createEl('p', { text: `Birthday: ${this.person.birthday}` });
   }

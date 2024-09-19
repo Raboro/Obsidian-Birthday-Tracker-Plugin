@@ -38,7 +38,7 @@ export class BirthdayTrackerView extends ItemView {
       text: `Name: ${person.name} (${person.age})`,
     });
     div.createEl('p', {
-      text: `Days next birthday: ${person.nextBirthdayInDays}`,
+      text: `Days next birthday: ${person.daysTillNextBirthday}`,
     });
     div.createEl('p', { text: `Birthday: ${person.birthday}` });
   }
