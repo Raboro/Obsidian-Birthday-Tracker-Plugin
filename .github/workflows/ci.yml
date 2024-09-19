@@ -38,6 +38,9 @@ jobs:
 
             - name: Check if all issues are fixed with biome
               run: bun run biome:ci
-            
+           
+            - name: Test
+              run: bun test
+
             - name: Build
               run: bun run build
