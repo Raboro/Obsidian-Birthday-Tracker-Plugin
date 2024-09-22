@@ -1,8 +1,8 @@
 export default class Birthday {
-  private birthdayAsString: string;
+  private readonly birthdayAsString: string;
+  private readonly age: number;
+  private readonly daysTillNextBirthday: number;
   private date: Date;
-  private age: number;
-  private daysTillNextBirthday: number;
 
   constructor(birthdayAsString: string, dateFormatting: string) {
     this.birthdayAsString = birthdayAsString;
