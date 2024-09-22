@@ -1,7 +1,7 @@
 import type Birthday from './birthday';
 
 export default class Person {
-  private name: string;
+  private readonly name: string;
   private birthday: Birthday;
 
   constructor(name: string, birthday: Birthday) {
