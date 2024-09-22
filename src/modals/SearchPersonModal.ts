@@ -3,7 +3,7 @@ import type { PersonDTO } from '../person';
 import PersonModal from './PersonModal';
 
 export default class SearchPersonModal extends FuzzySuggestModal<PersonDTO> {
-  private persons: PersonDTO[];
+  private readonly persons: PersonDTO[];
 
   constructor(app: App, persons: PersonDTO[]) {
     super(app);
