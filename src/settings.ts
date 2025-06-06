@@ -1,6 +1,6 @@
 import { type App, Notice, PluginSettingTab, Setting } from 'obsidian';
+import { type DateFormatter, DefaultDateFormatter } from './dateFormatter';
 import type BirthdayTrackerPlugin from './main';
-import { type DateFormatter, DefaultDateFormatter } from './DateFormatter';
 
 export interface BirthdayTrackerSettings {
   dateFormatting: DateFormatter;

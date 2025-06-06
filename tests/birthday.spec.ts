@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test';
 import Birthday from 'src/birthday';
-import { DefaultDateFormatter } from 'src/DateFormatter';
+import { DefaultDateFormatter } from 'src/dateFormatter';
 
 describe('Birthday', () => {
   test('toString() should be same as parsed str', () => {

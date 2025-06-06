@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { DefaultDateFormatter } from 'src/DateFormatter';
+import { DefaultDateFormatter } from 'src/dateFormatter';
 
 describe('DateFormatter', () => {
   test('parseDate should parse default correctly', () => {

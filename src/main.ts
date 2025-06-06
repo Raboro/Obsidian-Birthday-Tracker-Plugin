@@ -15,7 +15,6 @@ import {
   BIRTHDAY_TRACKER_YEAR_OVERVIEW_VIEW_TYPE,
   YearOverviewView,
 } from './views/yearOverviewView';
-import { DefaultDateFormatter } from './DateFormatter';
 
 export default class BirthdayTrackerPlugin extends Plugin {
   settings: BirthdayTrackerSettings;

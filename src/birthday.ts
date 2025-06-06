@@ -1,4 +1,4 @@
-import type { DateFormatter } from './DateFormatter';
+import type { DateFormatter } from './dateFormatter';
 
 export default class Birthday {
   private readonly birthdayAsString: string;
