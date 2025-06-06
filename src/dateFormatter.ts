@@ -18,11 +18,86 @@ export class DefaultDateFormatter implements DateFormatter {
   private readonly yearIndex: number;
   readonly format: string;
 
-  constructor(format: string) {
+  private constructor(format: string) {
     this.format = format;
     this.dayIndex = format.search(DefaultDateFormatter.DAY_IDENTIFIER);
     this.monthIndex = format.search(DefaultDateFormatter.MONTH_IDENTIFIER);
     this.yearIndex = format.search(DefaultDateFormatter.YEAR_IDENTIFIER);
+  }
+
+  static createFormat(format: string): DateFormatter | undefined {
+    return DefaultDateFormatter.isValidFormat(format)
+      ? new DefaultDateFormatter(format)
+      : undefined;
+  }
+
+  private static isValidFormat(format: string): boolean {
+    const containsDay = DefaultDateFormatter.formatContains(
+      DefaultDateFormatter.DAY_IDENTIFIER,
+      format,
+    );
+    const containsMonth = DefaultDateFormatter.formatContains(
+      DefaultDateFormatter.MONTH_IDENTIFIER,
+      format,
+    );
+    const containsYear = DefaultDateFormatter.formatContains(
+      DefaultDateFormatter.YEAR_IDENTIFIER,
+      format,
+    );
+    return (
+      containsDay &&
+      containsMonth &&
+      containsYear &&
+      !DefaultDateFormatter.containsInvalidChars(format)
+    );
+  }
+
+  private static formatContains(subStr: string, format: string): boolean {
+    return format.includes(subStr) || format.includes(subStr.toLowerCase());
+  }
+
+  private static containsInvalidChars(format: string): boolean {
+    const invalidChars: string[] = [
+      'A',
+      'B',
+      'C',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'W',
+      'X',
+      'Z',
+      '0',
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+    ];
+    for (const invalidChar in invalidChars) {
+      if (DefaultDateFormatter.formatContains(invalidChar, format)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   parseToDate(dateAsString: string): Date {
