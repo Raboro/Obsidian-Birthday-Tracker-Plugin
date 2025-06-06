@@ -111,7 +111,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
           splittedLine[1]?.replace(' ', '').split('=').last()?.trim() ?? '';
         const birthday = new Birthday(
           birthdayAsString,
-          new DefaultDateFormatter(this.settings.dateFormatting),
+          this.settings.dateFormatting,
         );
         persons.push(new Person(name, birthday));
       }

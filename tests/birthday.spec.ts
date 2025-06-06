@@ -7,7 +7,8 @@ describe('Birthday', () => {
     const dateAsString = '20/08/2000';
     const birthday = new Birthday(
       '20/08/2000',
-      new DefaultDateFormatter('DD/MM/YYYY'),
+      // biome-ignore lint/style/noNonNullAssertion: is valid
+      DefaultDateFormatter.createFormat('DD/MM/YYYY')!,
     );
     expect(birthday.toString()).toEqual(dateAsString);
   });

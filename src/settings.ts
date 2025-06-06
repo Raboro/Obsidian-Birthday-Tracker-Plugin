@@ -1,13 +1,15 @@
 import { type App, Notice, PluginSettingTab, Setting } from 'obsidian';
 import type BirthdayTrackerPlugin from './main';
+import { type DateFormatter, DefaultDateFormatter } from './DateFormatter';
 
 export interface BirthdayTrackerSettings {
-  dateFormatting: string;
+  dateFormatting: DateFormatter;
   birthdayNodeLocation: string;
 }
 
 export const DEFAULT_SETTINGS: BirthdayTrackerSettings = {
-  dateFormatting: 'DD/MM/YYYY',
+  // biome-ignore lint/style/noNonNullAssertion: default format is always valid, therefore null check is not necessary
+  dateFormatting: DefaultDateFormatter.createFormat('DD/MM/YYYY')!,
   birthdayNodeLocation: 'birthdayNode.md',
 };
 
@@ -32,7 +34,7 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
       .addText((text) =>
         text
           .setPlaceholder('Enter your format')
-          .setValue(this.plugin.settings.dateFormatting)
+          .setValue(this.plugin.settings.dateFormatting.format)
           .onChange(
             async (value) => await this.dateFormattingSettingsOnChange(value),
           ),
@@ -41,63 +43,14 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
 
   dateFormattingSettingsOnChange = async (value: string) => {
     let noticeMessage = 'Wrong date formatting!!';
-    if (this.isFormattingValid(value)) {
-      this.plugin.settings.dateFormatting = value;
+    const dateFormatter = DefaultDateFormatter.createFormat(value);
+    if (dateFormatter) {
+      this.plugin.settings.dateFormatting = dateFormatter;
       await this.plugin.saveSettings();
       noticeMessage = 'Valid date formatting';
     }
     new Notice(noticeMessage);
   };
-
-  isFormattingValid(format: string): boolean {
-    const containsDoubleD: boolean = this.formatContains('DD', format);
-    const containsDoubleM: boolean = this.formatContains('MM', format);
-    const containsFourY: boolean = this.formatContains('YYYY', format);
-    return (
-      containsDoubleD &&
-      containsDoubleM &&
-      containsFourY &&
-      !this.containsInvalidChars(format)
-    );
-  }
-
-  formatContains(subStr: string, format: string): boolean {
-    return format.contains(subStr) || format.contains(subStr.toLowerCase());
-  }
-
-  containsInvalidChars(format: string): boolean {
-    const invalidChars: string[] = [
-      'A',
-      'B',
-      'C',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-      'U',
-      'V',
-      'W',
-      'X',
-      'Z',
-    ];
-    for (const invalidChar in invalidChars) {
-      if (this.formatContains(invalidChar, format)) {
-        return true;
-      }
-    }
-    return false;
-  }
 
   birthdayNodeLocationSettings(): Setting {
     return new Setting(this.containerEl)
