@@ -3,13 +3,13 @@ import { type DateFormatter, DefaultDateFormatter } from './dateFormatter';
 import type BirthdayTrackerPlugin from './main';
 
 export interface BirthdayTrackerSettings {
-  dateFormatting: DateFormatter;
+  dateFormatter: DateFormatter;
   birthdayNodeLocation: string;
 }
 
 export const DEFAULT_SETTINGS: BirthdayTrackerSettings = {
   // biome-ignore lint/style/noNonNullAssertion: default format is always valid, therefore null check is not necessary
-  dateFormatting: DefaultDateFormatter.createFormat('DD/MM/YYYY')!,
+  dateFormatter: DefaultDateFormatter.createFormat('DD/MM/YYYY')!,
   birthdayNodeLocation: 'birthdayNode.md',
 };
 
@@ -23,29 +23,27 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
 
   display(): void {
     this.containerEl.empty();
-    this.dateFormattingSettings();
+    this.dateFormatterSettings();
     this.birthdayNodeLocationSettings();
   }
 
-  dateFormattingSettings(): Setting {
+  dateFormatterSettings(): Setting {
     return new Setting(this.containerEl)
       .setName('Date formatting')
       .setDesc('Format your dates will be displayed and collected')
       .addText((text) =>
         text
           .setPlaceholder('Enter your format')
-          .setValue(this.plugin.settings.dateFormatting.format)
-          .onChange(
-            async (value) => await this.dateFormattingSettingsOnChange(value),
-          ),
+          .setValue(this.plugin.settings.dateFormatter.format)
+          .onChange(async (v) => await this.dateFormatterSettingsOnChange(v)),
       );
   }
 
-  dateFormattingSettingsOnChange = async (value: string) => {
+  dateFormatterSettingsOnChange = async (value: string) => {
     let noticeMessage = 'Wrong date formatting!!';
     const dateFormatter = DefaultDateFormatter.createFormat(value);
     if (dateFormatter) {
-      this.plugin.settings.dateFormatting = dateFormatter;
+      this.plugin.settings.dateFormatter = dateFormatter;
       await this.plugin.saveSettings();
       noticeMessage = 'Valid date formatting';
     }
