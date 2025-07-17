@@ -11,5 +11,6 @@ describe('Birthday', () => {
       DefaultDateFormatter.createFormat('DD/MM/YYYY')!,
     );
     expect(birthday.toString()).toEqual(dateAsString);
+    expect(birthday.getAge()).toBeGreaterThan(0);
   });
 });
