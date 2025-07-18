@@ -22,11 +22,11 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
 
   display(): void {
     this.containerEl.empty();
-    this.dateFormatterSettings();
+    this.dateFormattingSettings();
     this.birthdayNodeLocationSettings();
   }
 
-  dateFormatterSettings(): Setting {
+  dateFormattingSettings(): Setting {
     return new Setting(this.containerEl)
       .setName('Date formatting')
       .setDesc('Format your dates will be displayed and collected')
@@ -34,11 +34,11 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
         text
           .setPlaceholder('Enter your format')
           .setValue(this.plugin.settings.dateFormatting)
-          .onChange(async (v) => await this.dateFormatterSettingsOnChange(v)),
+          .onChange(async (v) => await this.dateFormattingSettingsOnChange(v)),
       );
   }
 
-  dateFormatterSettingsOnChange = async (value: string) => {
+  dateFormattingSettingsOnChange = async (value: string) => {
     let noticeMessage = 'Wrong date formatting!!';
     const dateFormatter = DefaultDateFormatter.createFormat(value);
     if (dateFormatter) {
