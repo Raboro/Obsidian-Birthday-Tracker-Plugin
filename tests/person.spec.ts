@@ -1,6 +1,6 @@
-import { DefaultDateFormatter } from 'src/dateFormatter';
 import { describe, expect, test } from 'bun:test';
 import Birthday from 'src/birthday';
+import { DefaultDateFormatter } from 'src/dateFormatter';
 import Person from 'src/person';
 
 describe('Person', () => {

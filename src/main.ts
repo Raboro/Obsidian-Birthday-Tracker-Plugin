@@ -1,5 +1,6 @@
 import { Notice, Plugin, TFile, type WorkspaceLeaf } from 'obsidian';
 import Birthday from './birthday';
+import { DefaultDateFormatter } from './dateFormatter';
 import SearchPersonModal from './modals/SearchPersonModal';
 import Person from './person';
 import {
@@ -15,7 +16,6 @@ import {
   BIRTHDAY_TRACKER_YEAR_OVERVIEW_VIEW_TYPE,
   YearOverviewView,
 } from './views/yearOverviewView';
-import { DefaultDateFormatter } from './dateFormatter';
 
 export default class BirthdayTrackerPlugin extends Plugin {
   settings: BirthdayTrackerSettings;
