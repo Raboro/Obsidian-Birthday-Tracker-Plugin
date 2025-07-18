@@ -3,7 +3,7 @@ name: CI
 on:
     push:
         branches:
-            - master
+            - "*"
     workflow_dispatch:
 
 jobs:
@@ -38,7 +38,7 @@ jobs:
 
             - name: Check if all issues are fixed with biome
               run: bun run biome:ci
-           
+
             - name: Test
               run: bun test
 
