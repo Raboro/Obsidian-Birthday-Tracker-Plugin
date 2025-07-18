@@ -1,15 +1,14 @@
 import { type App, Notice, PluginSettingTab, Setting } from 'obsidian';
-import { type DateFormatter, DefaultDateFormatter } from './dateFormatter';
+import { DefaultDateFormatter } from './dateFormatter';
 import type BirthdayTrackerPlugin from './main';
 
 export interface BirthdayTrackerSettings {
-  dateFormatter: DateFormatter;
+  dateFormatting: string;
   birthdayNodeLocation: string;
 }
 
 export const DEFAULT_SETTINGS: BirthdayTrackerSettings = {
-  // biome-ignore lint/style/noNonNullAssertion: default format is always valid, therefore null check is not necessary
-  dateFormatter: DefaultDateFormatter.createFormat('DD/MM/YYYY')!,
+  dateFormatting: 'DD/MM/YYYY',
   birthdayNodeLocation: 'birthdayNode.md',
 };
 
@@ -34,7 +33,7 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
       .addText((text) =>
         text
           .setPlaceholder('Enter your format')
-          .setValue(this.plugin.settings.dateFormatter.format)
+          .setValue(this.plugin.settings.dateFormatting)
           .onChange(async (v) => await this.dateFormatterSettingsOnChange(v)),
       );
   }
@@ -43,7 +42,7 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
     let noticeMessage = 'Wrong date formatting!!';
     const dateFormatter = DefaultDateFormatter.createFormat(value);
     if (dateFormatter) {
-      this.plugin.settings.dateFormatter = dateFormatter;
+      this.plugin.settings.dateFormatting = dateFormatter.format;
       await this.plugin.saveSettings();
       noticeMessage = 'Valid date formatting';
     }
