@@ -7,7 +7,7 @@ describe('Person', () => {
   test('creation of person with birthday today should have birthday today', () => {
     const today = new Date();
     const day = today.getDate();
-    const month = today.getMonth() + 1; // needed offset
+    const month = today.getMonth() + 1; // needed offset cause getMonth() returns wrong month => WHYY??
     const year = today.getFullYear();
     const todayAsString = `${(day < 10 ? '0' : '') + day}/${(month < 10 ? '0' : '') + month}/${year}`;
     // biome-ignore lint/style/noNonNullAssertion: is valid
