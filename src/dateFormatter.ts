@@ -6,6 +6,7 @@ export interface DateFormatter {
 interface DateComponentRange {
   start: number;
   end: number;
+  offset?: number;
 }
 
 export class DefaultDateFormatter implements DateFormatter {
@@ -109,6 +110,7 @@ export class DefaultDateFormatter implements DateFormatter {
     const month = this.extractComponentOfDate(dateAsString, {
       start: this.monthIndex,
       end: this.monthIndex + DefaultDateFormatter.MONTH_IDENTIFIER.length,
+      offset: 1, // needed offset cause Date API returns wrong month of date => WHYYY???
     });
     const day = this.extractComponentOfDate(dateAsString, {
       start: this.dayIndex,
@@ -122,6 +124,9 @@ export class DefaultDateFormatter implements DateFormatter {
     dateAsString: string,
     range: DateComponentRange,
   ): number {
-    return Number.parseInt(dateAsString.substring(range.start, range.end));
+    return (
+      Number.parseInt(dateAsString.substring(range.start, range.end)) -
+      (range.offset ?? 0)
+    );
   }
 }
