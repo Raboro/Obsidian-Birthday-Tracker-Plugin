@@ -6,18 +6,14 @@ describe('DateFormatter', () => {
     // biome-ignore lint/style/noNonNullAssertion: is valid
     const formatter = DefaultDateFormatter.createFormat('DD/MM/YYYY')!;
     const date = formatter.parseToDate('20/08/2000');
-    expect(date.getDate()).toBe(20);
-    expect(date.getMonth()).toBe(8);
-    expect(date.getFullYear()).toBe(2000);
+    expect(date.toISOString()).toStartWith('2000-08-20');
   });
 
   test('parseDate should parse with different format correctly', () => {
     // biome-ignore lint/style/noNonNullAssertion: is valid
     const formatter = DefaultDateFormatter.createFormat('MM/DD/YYYY')!;
     const date = formatter.parseToDate('08/20/2000');
-    expect(date.getDate()).toBe(20);
-    expect(date.getMonth()).toBe(8);
-    expect(date.getFullYear()).toBe(2000);
+    expect(date.toISOString()).toStartWith('2000-08-20');
   });
 
   test('creation should create valid formatter', () => {
