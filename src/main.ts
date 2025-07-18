@@ -15,6 +15,7 @@ import {
   BIRTHDAY_TRACKER_YEAR_OVERVIEW_VIEW_TYPE,
   YearOverviewView,
 } from './views/yearOverviewView';
+import { DefaultDateFormatter } from './dateFormatter';
 
 export default class BirthdayTrackerPlugin extends Plugin {
   settings: BirthdayTrackerSettings;
@@ -47,7 +48,7 @@ export default class BirthdayTrackerPlugin extends Plugin {
     this.addCommands();
 
     this.addSettingTab(new BirthdayTrackerSettingTab(this.app, this));
-    this.app.workspace.onLayoutReady(() => this.trackBirthdays());
+    this.app.workspace.onLayoutReady(async () => await this.trackBirthdays());
   }
 
   private addCommands() {
@@ -106,14 +107,14 @@ export default class BirthdayTrackerPlugin extends Plugin {
       if (this.lineContainsPerson(line)) {
         const splittedLine = line.split(';');
         const name = splittedLine[0]?.trim().split('=').last()?.trim() ?? '';
-        const birthday =
+        const birthdayAsString =
           splittedLine[1]?.replace(' ', '').split('=').last()?.trim() ?? '';
-        persons.push(
-          new Person(
-            name,
-            new Birthday(birthday, this.settings.dateFormatting),
-          ),
+        const birthday = new Birthday(
+          birthdayAsString,
+          // biome-ignore lint/style/noNonNullAssertion: Should work, because this check is already done before in settings.ts when dateFormatting is updated
+          DefaultDateFormatter.createFormat(this.settings.dateFormatting)!,
         );
+        persons.push(new Person(name, birthday));
       }
     });
     return persons;

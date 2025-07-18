@@ -1,43 +1,16 @@
+import type { DateFormatter } from './dateFormatter';
+
 export default class Birthday {
   private readonly birthdayAsString: string;
   private readonly age: number;
   private readonly daysTillNextBirthday: number;
-  private date: Date;
+  private readonly date: Date;
 
-  constructor(birthdayAsString: string, dateFormatting: string) {
+  constructor(birthdayAsString: string, dateFormatter: DateFormatter) {
     this.birthdayAsString = birthdayAsString;
-    this.convertStringToDate(dateFormatting);
+    this.date = dateFormatter.parseToDate(birthdayAsString);
     this.age = this.determineAge();
     this.daysTillNextBirthday = this.calcDaysTillNextBirthday();
-  }
-
-  private convertStringToDate(dateFormatting: string) {
-    this.date = this.constructDate(
-      dateFormatting.search('DD'),
-      dateFormatting.search('MM'),
-      dateFormatting.search('YYYY'),
-    );
-  }
-
-  private constructDate(
-    dayIndex: number,
-    monthIndex: number,
-    yearIndex: number,
-  ): Date {
-    const date = new Date();
-    date.setFullYear(
-      this.dateNumber(yearIndex, yearIndex + 4),
-      this.dateNumber(monthIndex, monthIndex + 2, 1), // month has one offset
-      this.dateNumber(dayIndex, dayIndex + 2),
-    );
-    return date;
-  }
-
-  private dateNumber(start: number, end: number, offset?: number): number {
-    return (
-      Number.parseInt(this.birthdayAsString.substring(start, end)) -
-      (offset ?? 0)
-    );
   }
 
   private determineAge(): number {

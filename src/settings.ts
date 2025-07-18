@@ -1,4 +1,5 @@
 import { type App, Notice, PluginSettingTab, Setting } from 'obsidian';
+import { DefaultDateFormatter } from './dateFormatter';
 import type BirthdayTrackerPlugin from './main';
 
 export interface BirthdayTrackerSettings {
@@ -33,71 +34,20 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
         text
           .setPlaceholder('Enter your format')
           .setValue(this.plugin.settings.dateFormatting)
-          .onChange(
-            async (value) => await this.dateFormattingSettingsOnChange(value),
-          ),
+          .onChange(async (v) => await this.dateFormattingSettingsOnChange(v)),
       );
   }
 
   dateFormattingSettingsOnChange = async (value: string) => {
     let noticeMessage = 'Wrong date formatting!!';
-    if (this.isFormattingValid(value)) {
-      this.plugin.settings.dateFormatting = value;
+    const dateFormatter = DefaultDateFormatter.createFormat(value);
+    if (dateFormatter) {
+      this.plugin.settings.dateFormatting = dateFormatter.format;
       await this.plugin.saveSettings();
       noticeMessage = 'Valid date formatting';
     }
     new Notice(noticeMessage);
   };
-
-  isFormattingValid(format: string): boolean {
-    const containsDoubleD: boolean = this.formatContains('DD', format);
-    const containsDoubleM: boolean = this.formatContains('MM', format);
-    const containsFourY: boolean = this.formatContains('YYYY', format);
-    return (
-      containsDoubleD &&
-      containsDoubleM &&
-      containsFourY &&
-      !this.containsInvalidChars(format)
-    );
-  }
-
-  formatContains(subStr: string, format: string): boolean {
-    return format.contains(subStr) || format.contains(subStr.toLowerCase());
-  }
-
-  containsInvalidChars(format: string): boolean {
-    const invalidChars: string[] = [
-      'A',
-      'B',
-      'C',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-      'U',
-      'V',
-      'W',
-      'X',
-      'Z',
-    ];
-    for (const invalidChar in invalidChars) {
-      if (this.formatContains(invalidChar, format)) {
-        return true;
-      }
-    }
-    return false;
-  }
 
   birthdayNodeLocationSettings(): Setting {
     return new Setting(this.containerEl)
