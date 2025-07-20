@@ -1,10 +1,10 @@
 {
-	"id": "birthday-tracker",
-	"name": "Birthday-Tracker",
-	"version": "1.2.0",
-	"minAppVersion": "0.15.0",
-	"description": "Keep track of all birthdays of your family and friends.",
-	"author": "Marius Wörfel",
-	"authorUrl": "https://github.com/Raboro",
-	"isDesktopOnly": false
+  "id": "birthday-tracker",
+  "name": "Birthday-Tracker",
+  "version": "1.2.0",
+  "minAppVersion": "0.15.0",
+  "description": "Keep track of all birthdays of your family and friends.",
+  "author": "Marius Wörfel",
+  "authorUrl": "https://github.com/Raboro",
+  "isDesktopOnly": false
 }
