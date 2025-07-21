@@ -4,8 +4,8 @@ import { DefaultDateFormatter } from './dateFormatter';
 import SearchPersonModal from './modals/SearchPersonModal';
 import Person from './person';
 import {
-  BirthdayTrackerSettingTab,
   type BirthdayTrackerSettings,
+  BirthdayTrackerSettingTab,
   DEFAULT_SETTINGS,
 } from './settings';
 import {
