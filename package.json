@@ -14,7 +14,7 @@
   "author": "Marius Wörfel",
   "license": "MIT",
   "devDependencies": {
-    "@biomejs/biome": "^1.9.1",
+    "@biomejs/biome": "^2.1.2",
     "@types/bun": "^1.1.9",
     "@types/node": "^22.5.5",
     "builtin-modules": "5.0.0",
