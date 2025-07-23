@@ -48,7 +48,12 @@ export default class BirthdayTrackerPlugin extends Plugin {
     this.addCommands();
 
     this.addSettingTab(new BirthdayTrackerSettingTab(this.app, this));
-    this.app.workspace.onLayoutReady(async () => await this.trackBirthdays());
+    this.app.workspace.onLayoutReady(
+      async () =>
+        await this.trackBirthdaysWithOpenOption(
+          this.settings.automaticallyOpenBirthdayViewOnStart,
+        ),
+    );
   }
 
   private addCommands() {
@@ -71,11 +76,15 @@ export default class BirthdayTrackerPlugin extends Plugin {
 
   onunload() {}
 
-  trackBirthdays = async () => {
+  trackBirthdays = async () => await this.trackBirthdaysWithOpenOption(true);
+
+  trackBirthdaysWithOpenOption = async (shouldOpenView: boolean) => {
     const content = await this.fetchContent();
     if (content) {
       this.trackBirthdaysOfContent(content);
-      await this.openBirthdayView();
+      if (shouldOpenView) {
+        await this.openBirthdayView();
+      }
     } else {
       new Notice('Nothing inside your node');
     }

@@ -5,11 +5,13 @@ import type BirthdayTrackerPlugin from './main';
 export interface BirthdayTrackerSettings {
   dateFormatting: string;
   birthdayNodeLocation: string;
+  automaticallyOpenBirthdayViewOnStart: boolean;
 }
 
 export const DEFAULT_SETTINGS: BirthdayTrackerSettings = {
   dateFormatting: 'DD/MM/YYYY',
   birthdayNodeLocation: 'birthdayNode.md',
+  automaticallyOpenBirthdayViewOnStart: true,
 };
 
 export class BirthdayTrackerSettingTab extends PluginSettingTab {
@@ -24,6 +26,7 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
     this.containerEl.empty();
     this.dateFormattingSettings();
     this.birthdayNodeLocationSettings();
+    this.automaticallyOpenBirthdayViewOnStartSettings();
   }
 
   dateFormattingSettings(): Setting {
@@ -64,5 +67,21 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
             await this.plugin.saveSettings();
           }),
       );
+  }
+
+  automaticallyOpenBirthdayViewOnStartSettings(): Setting {
+    return new Setting(this.containerEl)
+      .setName('Automatically open birthday view on startup')
+      .setDesc(
+        'If enabled, the birthday view is automatically opened in the right leaf when Obsidian starts',
+      )
+      .addToggle((toggle) => {
+        toggle
+          .setValue(this.plugin.settings.automaticallyOpenBirthdayViewOnStart)
+          .onChange(async (value) => {
+            this.plugin.settings.automaticallyOpenBirthdayViewOnStart = value;
+            await this.plugin.saveSettings();
+          });
+      });
   }
 }
