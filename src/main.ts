@@ -78,11 +78,11 @@ export default class BirthdayTrackerPlugin extends Plugin {
 
   trackBirthdays = async () => await this.trackBirthdaysWithOpenOption(true);
 
-  trackBirthdaysWithOpenOption = async (openView: boolean) => {
+  trackBirthdaysWithOpenOption = async (shouldOpenView: boolean) => {
     const content = await this.fetchContent();
     if (content) {
       this.trackBirthdaysOfContent(content);
-      if (openView) {
+      if (shouldOpenView) {
         await this.openBirthdayView();
       }
     } else {
