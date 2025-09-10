@@ -1,4 +1,4 @@
-name: Dependabot update from npm to bun
+name: Dependabot CI
 
 on:
   pull_request:
@@ -10,8 +10,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  update-bun-lockb:
-    name: "Update bun.lockb"
+  ci:
+    name: "Dependabot CI"
     if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
