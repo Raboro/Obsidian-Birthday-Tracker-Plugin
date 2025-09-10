@@ -29,23 +29,9 @@ jobs:
       - name: Update lock file
         run: |
           bun install 
-          git add bun.lockb
 
       - name: Test
         run: bun test 
 
       - name: Build
         run: bun run build
-
-      - name: Commit changes
-        run: |
-          git config --global user.name 'dependabot[bot]'
-          git config --global user.email 'dependabot[bot]@users.noreply.github.com'
-          git commit --amend --no-edit
-
-      - name: Push changes to lock file
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.event.pull_request.head.ref }}
-          force: true
