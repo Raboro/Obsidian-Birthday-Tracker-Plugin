@@ -18,7 +18,7 @@ export default class SearchPersonModal extends FuzzySuggestModal<PersonDTO> {
     return item.name;
   }
 
-  onChooseItem(item: PersonDTO, evt: MouseEvent | KeyboardEvent): void {
+  onChooseItem(item: PersonDTO, _evt: MouseEvent | KeyboardEvent): void {
     new PersonModal(this.app, item).open();
   }
 }
