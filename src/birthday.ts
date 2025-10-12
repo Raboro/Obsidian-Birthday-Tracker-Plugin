@@ -37,7 +37,7 @@ export default class Birthday {
   private calcDays(newYear: number): number {
     const dateCurrentYear: Date = new Date(this.date);
     dateCurrentYear.setFullYear(newYear);
-    // biome-ignore lint/complexity/useDateNow: <explanation>
+    // biome-ignore lint/complexity/useDateNow: new Date().getTime() works fine
     const timeDifference = new Date().getTime() - dateCurrentYear.getTime();
     return -Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
   }
