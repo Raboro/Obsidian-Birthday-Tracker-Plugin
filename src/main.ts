@@ -111,7 +111,6 @@ export default class BirthdayTrackerPlugin extends Plugin {
 
   collectPersons(content: string): Array<Person> {
     const persons: Array<Person> = [];
-    // biome-ignore lint: performance issue to use for..of not relevant
     content.split(/\r?\n/).forEach((line) => {
       if (this.lineContainsPerson(line)) {
         const splittedLine = line.split(';');

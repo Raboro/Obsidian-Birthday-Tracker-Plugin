@@ -37,7 +37,7 @@ export default class Birthday {
   private calcDays(newYear: number): number {
     const dateCurrentYear: Date = new Date(this.date);
     dateCurrentYear.setFullYear(newYear);
-    const timeDifference = new Date().getTime() - dateCurrentYear.getTime();
+    const timeDifference = Date.now() - dateCurrentYear.getTime();
     return -Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
   }
 

@@ -125,7 +125,7 @@ export class DefaultDateFormatter implements DateFormatter {
     range: DateComponentRange,
   ): number {
     return (
-      Number.parseInt(dateAsString.substring(range.start, range.end)) -
+      Number.parseInt(dateAsString.substring(range.start, range.end), 10) -
       (range.offset ?? 0)
     );
   }
