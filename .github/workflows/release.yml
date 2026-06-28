@@ -198,6 +198,17 @@ jobs:
                   path: .
                   output-file: sbom.spdx.json
 
+            - name: Upload SBOM
+              if: ${{ always() }}
+              uses: actions/upload-artifact@v4
+              env:
+                  RELEASE_SHA: ${{ needs.build-release.outputs.release_sha }}
+              with:
+                  name: sbom-${{ env.RELEASE_VERSION || github.run_number }}-$RELEASE_SHA
+                  path: sbom.spdx.json
+                  if-no-files-found: error
+                  retention-days: 30
+
             - name: Attest plugin artifacts
               if: ${{ inputs.dry-run != true }}
               uses: actions/attest@v4
