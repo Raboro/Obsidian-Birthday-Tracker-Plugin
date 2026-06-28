@@ -82,7 +82,7 @@ jobs:
               env:
                   RELEASE_VERSION: ${{ needs.compute-version.outputs.release-version }}
               run: |
-                  set -euo pipefailq
+                  set -euo pipefail
                   BRANCH="release/$RELEASE_VERSION"
                   git switch -c "$BRANCH"
                   echo "branch=$BRANCH" >> "GITHUB_OUTPUT"
