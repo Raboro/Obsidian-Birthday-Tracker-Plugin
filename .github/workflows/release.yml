@@ -21,6 +21,8 @@ jobs:
         env:
             INPUT_RELEASE_VERSION: ${{ inputs.release-version }}
         steps:
+            - uses: actions/checkout@v3
+
             - name: Compute
               id: out
               run: |
