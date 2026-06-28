@@ -85,7 +85,7 @@ jobs:
                   set -euo pipefail
                   BRANCH="release/$RELEASE_VERSION"
                   git switch -c "$BRANCH"
-                  echo "branch=$BRANCH" >> "GITHUB_OUTPUT"
+                  echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
 
             - name: Set release version
               env:
