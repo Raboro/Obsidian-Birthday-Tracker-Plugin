@@ -7,6 +7,10 @@ on:
                 desciption: New version to release (e.g. 1.0.9) or use basic computation to get to next release version
                 required: false
                 default: ""
+            dry-run:
+                desciption: Simulate release but don't push or create a release
+                required: false
+                default: false
 
 jobs:
     compute-version:
@@ -159,6 +163,7 @@ jobs:
                   bun-version: latest
 
             - name: Merge release branch into main
+              if: ${{ inputs.dry-run != true }}
               env:
                   BRANCH: ${{ needs.build-release.outputs.release_branch }}
               run: |
@@ -168,6 +173,7 @@ jobs:
                   git merge --ff-only "origin/$BRANCH"
 
             - name: Tag release and push
+              if: ${{ inputs.dry-run != true }}
               env:
                   TAG: ${{ needs.compute-version.outputs.release-version }}
                   RELEASE_SHA: ${{ needs.build-release.outputs.release_sha }}
