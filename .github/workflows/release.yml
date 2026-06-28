@@ -22,14 +22,17 @@ jobs:
             INPUT_RELEASE_VERSION: ${{ inputs.release-version }}
         steps:
             - uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+                  fetch-tags: true
 
             - name: Compute
               id: out
               run: |
                   set -euo pipefail
 
-                  if [ -n "${INPUT_RELEAVE_VERSION:-}" ]; then
-                      target_version="$INPUT_RELEAVE_VERSION"
+                  if [ -n "${INPUT_RELEASE_VERSION:-}" ]; then
+                      target_version="$INPUT_RELEASE_VERSION"
                   else
                       highest_tag=$(git describe --tags --abbrev=0 | tr -d '\n')
 
