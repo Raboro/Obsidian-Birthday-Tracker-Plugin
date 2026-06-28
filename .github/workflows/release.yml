@@ -203,8 +203,9 @@ jobs:
               uses: actions/upload-artifact@v4
               env:
                   RELEASE_SHA: ${{ needs.build-release.outputs.release_sha }}
+                  RELEASE_VERSION: ${{ needs.compute-version.outputs.release-version }}
               with:
-                  name: sbom-${{ env.RELEASE_VERSION || github.run_number }}-$RELEASE_SHA
+                  name: sbom-${{ env.RELEASE_VERSION }}-${{ env.RELEASE_SHA }}
                   path: sbom.spdx.json
                   if-no-files-found: error
                   retention-days: 30
