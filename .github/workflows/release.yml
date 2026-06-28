@@ -17,7 +17,7 @@ jobs:
     compute-version:
         runs-on: ubuntu-latest
         outputs:
-            release-version: ${{ steps.out.outputs.version }}
+            release-version: ${{ steps.out.outputs.release-version }}
         env:
             INPUT_RELEASE_VERSION: ${{ inputs.release-version }}
         steps:
