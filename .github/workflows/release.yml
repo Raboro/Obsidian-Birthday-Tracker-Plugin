@@ -115,14 +115,14 @@ jobs:
 
                   mv package.json.tmp package.json
 
-            - name: Lint repo
-              shell: bash
-              run: bash "./scripts/linter.sh"
-
             - name: Setup bun
               uses: oven-sh/setup-bun@v2
               with:
                   bun-version: latest
+
+            - name: Lint repo
+              shell: bash
+              run: bash "./scripts/linter.sh"
 
             - name: Build plugin
               run: |
