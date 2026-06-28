@@ -61,9 +61,7 @@ jobs:
 
             - name: Validate repo
               shell: bash
-              env:
-                  ACTION_PATH: ${{ github.action_path }}
-              run: bash "$ACTION_PATH/scripts/validate.sh"
+              run: bash "./scripts/validate.sh"
 
             - name: Configure git
               run: |
@@ -119,9 +117,7 @@ jobs:
 
             - name: Lint repo
               shell: bash
-              env:
-                  ACTION_PATH: ${{ github.action_path }}
-              run: bash "$ACTION_PATH/scripts/linter.sh"
+              run: bash "./scripts/linter.sh"
 
             - name: Setup bun
               uses: oven-sh/setup-bun@v2
