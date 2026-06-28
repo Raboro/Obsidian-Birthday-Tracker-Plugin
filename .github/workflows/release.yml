@@ -150,7 +150,10 @@ jobs:
     finalize:
         runs-on: ubuntu-latest
         needs: [compute-version, build-release]
-
+        permissions:
+            id-token: write
+            contents: read
+            attestations: write
         steps:
             - uses: actions/checkout@v3
 
@@ -188,6 +191,31 @@ jobs:
               run: |
                   bun install
                   bun run build
+
+            - name: Generate SBOM
+              uses: anchore/sbom-action@v0.24.0
+              with:
+                  path: .
+                  output-file: sbom.spdx.json
+
+            - name: Attest plugin artifacts
+              if: ${{ inputs.dry-run != true }}
+              uses: actions/attest@v4
+              with:
+                  subject-path: |
+                      main.js
+                      manifest.json
+                      styles.css
+
+            - name: Attest plugin artifacts SBOM
+              if: ${{ inputs.dry-run != true }}
+              uses: actions/attest@v4
+              with:
+                  subject-path: |
+                      main.js
+                      manifest.json
+                      styles.css
+                  sbom-path: sbom.spdx.json
 
             - name: Create release
               if: ${{ inputs.dry-run != true }}
