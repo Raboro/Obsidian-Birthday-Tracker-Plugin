@@ -1,4 +1,11 @@
-import { type App, Notice, PluginSettingTab, Setting } from 'obsidian';
+import {
+  type App,
+  Notice,
+  PluginSettingTab,
+  requireApiVersion,
+  Setting,
+  type SettingDefinitionItem,
+} from 'obsidian';
 import { DefaultDateFormatter } from './dateFormatter';
 import type BirthdayTrackerPlugin from './main';
 
@@ -20,6 +27,58 @@ export class BirthdayTrackerSettingTab extends PluginSettingTab {
   constructor(app: App, plugin: BirthdayTrackerPlugin) {
     super(app, plugin);
     this.plugin = plugin;
+  }
+
+  getSettingDefinitions(): SettingDefinitionItem<
+    keyof BirthdayTrackerSettings
+  >[] {
+    if (!requireApiVersion('1.13.0')) {
+      return [];
+    }
+
+    return [
+      {
+        name: 'Date formatting',
+        desc: 'Format your dates will be displayed and collected',
+        render: (setting) => {
+          setting.addText((text) =>
+            text
+              .setPlaceholder('Enter your format')
+              .setValue(this.plugin.settings.dateFormatting)
+              .onChange(
+                async (value) =>
+                  await this.dateFormattingSettingsOnChange(value),
+              ),
+          );
+        },
+      },
+      {
+        name: 'Birthday node location',
+        desc: 'Location of your Node containing the birthday data with .md as postfix',
+        control: {
+          type: 'textarea',
+          key: 'birthdayNodeLocation',
+          placeholder: 'Enter the node location',
+        },
+      },
+      {
+        name: 'Automatically open birthday view on startup',
+        desc: 'If enabled, the birthday view is automatically opened in the right leaf when Obsidian starts',
+        control: {
+          type: 'toggle',
+          key: 'automaticallyOpenBirthdayViewOnStart',
+        },
+      },
+    ];
+  }
+
+  async setControlValue(key: string, value: unknown): Promise<void> {
+    if (!(key in this.plugin.settings)) {
+      return;
+    }
+
+    Reflect.set(this.plugin.settings, key, value);
+    await this.plugin.saveSettings();
   }
 
   display(): void {
